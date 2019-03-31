@@ -1,0 +1,28 @@
+{
+  "name": "contentrequests",
+  "version": "0.0.1",
+  "description": "Web application for content requests utilizing media APIs in order to search for requisite media ()\u001b[DGoodreads, IMDB, AniDB, etc.).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-moran/contentRequests.git"
+  },
+  "keywords": [
+    "goodreads",
+    "media",
+    "plex",
+    "node",
+    "books",
+    "movies",
+    "tv"
+  ],
+  "author": "John Moran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/j-moran/contentRequests/issues"
+  },
+  "homepage": "https://github.com/j-moran/contentRequests#readme"
+}
