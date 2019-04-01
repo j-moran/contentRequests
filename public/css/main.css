@@ -1,0 +1,28 @@
+* {
+	color: rgba(255,255,255,70%);
+}
+
+.fa-bars {
+	color: #cb7a1f;
+}
+
+.btn-light {
+	border-color: #cb7a1f;
+}
+
+.navbar-dark {
+	background-color: rgb(26, 34, 40);
+	border-bottom: 1px solid #CB7A1F;
+}
+
+.navbar-dark .navbar-brand {
+    color: rgba(255,255,255,70%);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,70%);
+}
+
+#sidebarCollapse {
+	background: #38474f;
+}
