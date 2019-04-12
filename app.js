@@ -11,6 +11,8 @@ var express 		= require('express')
 	User			= require('./models/user'),
 	Request			= require('./models/request');
 
+require('dotenv').config();
+
 //=======================
 //Route Variables
 //=======================
@@ -31,7 +33,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 app.use(require('express-session')({
-	secret: 'Maryhadalittlelamb',
+	secret: process.env.APP_SECRET,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -42,7 +44,7 @@ app.use(authRoutes);
 //=======================
 //Server Settings
 //=======================
-var port = process.env.PORT || 80;
+var port = process.env.APP_PORT;
 app.listen(port, function(){
 	console.log('Server Started!');
 });

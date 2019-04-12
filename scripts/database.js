@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
-const server = '127.0.0.1:27017';
-const database = 'contentRequest';
+const server = process.env.DB_HOST;
+const database = process.env.DB_NAME;
 
 class Database {
 	constructor() {
@@ -9,7 +9,7 @@ class Database {
 	}
 
 	_connect(){
-		mongoose.connect(`mongodb://${server}/${database}`)
+		mongoose.connect(`mongodb://${server}:27017/${database}`, {useNewUrlParser: true})
 			.then(() => {
 				console.log('Successfully connected to database!');
 			})
