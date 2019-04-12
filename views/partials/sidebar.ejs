@@ -13,15 +13,18 @@
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">[USERNAME]</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="/profile">Profile</a>
-                    </li>
-                    <li>
-                        <a href="/login">Log In</a>
-                    </li>
-                    <li>
-                        <a href="/logout">Logout</a>
-                    </li>
+                    <% if(currentUser){ %>
+                        <li>
+                            <a href="/profile">Profile</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    <% } else { %>
+                        <li>    
+                            <a href="/login">Log In</a>
+                        </li>
+                    <% }; %>
                 </ul>
             </li>
         </ul>

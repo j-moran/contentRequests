@@ -38,6 +38,13 @@ app.use(require('express-session')({
 	saveUninitialized: false
 }));
 
+app.use(function(req,res,next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
+
 app.use(pageRoutes);
 app.use(authRoutes);
 
