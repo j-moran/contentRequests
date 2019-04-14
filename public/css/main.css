@@ -11,6 +11,11 @@ hr {
 	color: rgba(255,255,255,70%);
 }
 
+.card {
+	background: #38474F;
+	border: 1px solid #cb7a1f60;
+}
+
 .fa-bars {
 	color: #cb7a1f;
 }
