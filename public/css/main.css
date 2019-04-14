@@ -2,6 +2,15 @@
 	color: rgba(255,255,255,70%);
 }
 
+hr {
+	background: #cb7a1f80;
+	height: 1px;
+}
+
+.btn-secondary {
+	color: rgba(255,255,255,70%);
+}
+
 .fa-bars {
 	color: #cb7a1f;
 }

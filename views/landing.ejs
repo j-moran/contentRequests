@@ -2,8 +2,35 @@
 <% include ./partials/sidebar %>
 
 
-<button>Ebook</button>
-<button>Manga</button>
+<button class="btn btn-secondary btn-lg btn-block mb-2" id="ebookRequest">Ebook</button>
+
+<div class="card" id="ebookForm">
+	<form class="card-body">
+		<div class="form-group">
+			<label for="ebookTitle">Title</label>
+			<input type="text" class="form-control" id="ebookTitle" placeholder="Enter title:">
+		</div>
+
+		<div class="form-group">
+			<label for="ebookAuthor">Author:</label>
+			<input type="text" class="form-control" id="ebookAuthor" placeholder="Enter author name:">
+		</div>
+	</form>
+</div>
+
+<hr>
+<button class="btn btn-secondary btn-lg btn-block mb-2" id="mangaRequest">Manga</button>
+
+<div class="card" id="mangaForm">
+	<form class="card-body">
+		<div class="form-group">
+			<label for="ebookAuthor">Author:</label>
+			<input type="text" class="form-control" id="ebookAuthor" placeholder="Enter author name:">
+		</div>
+	</form>
+</div>
+
+<hr>
 
 
 <% include ./partials/footer %>
