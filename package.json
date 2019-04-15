@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/j-moran/contentRequests#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "dotenv": "^7.0.0",
@@ -36,6 +37,7 @@
     "mongoose": "^5.4.20",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^5.0.1"
+    "passport-local-mongoose": "^5.0.1",
+    "request": "^2.88.0"
   }
 }

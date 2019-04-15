@@ -6,7 +6,7 @@
 </div>
 
 <div class="card" id="reqForm">
-	<form class="card-body" action="/search" method="get">
+	<form id="searchForm" class="card-body" action="/search" method="get">
 		<div class="form-group">
 			<label for="title">Title</label>
 			<input type="text" class="form-control" id="title" name="title" placeholder="Enter title:">
@@ -24,18 +24,18 @@
 
 		<div class="form-group">
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="ebook" value="option1">
+				<input class="form-check-input" type="checkbox" id="ebook" name="media" value="ebook">
 				<label class="form-check-label" for="ebook">Ebook</label>
 			</div>
 
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="manga" value="option2">
+				<input class="form-check-input" type="checkbox" id="manga" name="media" value="manga">
 				<label class="form-check-label" for="manga">Manga</label>
 			</div>
 
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="lightNovel" value="option3">
-				<label class="form-check-label" for="lightNovel">Light Novel</label>
+				<input class="form-check-input" type="checkbox" id="novel" name="media" value="novel">
+				<label class="form-check-label" for="novel">Light Novel</label>
 			</div>
 		</div>
 
