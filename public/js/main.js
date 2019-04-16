@@ -1,7 +1,11 @@
 $('#searchForm').on('submit', function(e){
-	if($("input[type=checkbox]:checked").length === 0){
+	if($("input[name=media]:checked").length === 0){
 		e.preventDefault();
-		alert('Please check at least one checkbox!');
+		alert('Please choose one type:');
 		return false;
 	};
 });
+
+function goBack(){
+	window.history.back();
+};

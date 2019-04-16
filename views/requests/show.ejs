@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+<% include ../partials/sidebar %>
+
+<% if(typeof results != "undefined"){ %>
+	<% console.log(results); %>
+	<% results.forEach(function(item){ %>
+		<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
+		<p>Type: <%= item.type %></p>
+		<img src=<%= item.image_url %>>
+		<hr>
+	<% }); %>
+<% }; %>
+
+<hr>
+
+<% if(typeof recs != "undefined"){ %>
+	<% if(recs.length > 0 ){ %>
+		<% for(var i = 0; i < 5; i++){ %>
+			<p>Title: <a href="/request/show?id=<%= recs[i].mal_id %>" ><%= recs[i].title %></a></p>	
+			<p>Type: <%= recs[i].type %></p>
+			<img src=<%= recs[i].image_url %>>
+			<hr>
+		<% }; %>
+	<% } else { %>
+		<p>There are no recommendations available at this time.</p>
+		<hr>
+	<% }; %>
+<% }; %>
+
+<button class="btn btn-secondary" onClick="goBack()">Return to previous page</button>
+
+<% include ../partials/footer %>

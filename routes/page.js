@@ -12,37 +12,58 @@ router.get('/profile', function(req,res){
 	res.render('users/index');
 });
 
-router.get('/search', function(req,res){
-	var keyword = encodeURI(req.query.title);
-	var type = (req.query.media);
+router.get('/request', function(req,res){
+	if(Object.keys(req.query).length === 0){
+		res.render('requests/index');
+	} else{
+		var keyword = encodeURI(req.query.keyword);
+		var type = req.query.media;
+		var nsfw = req.query.nsfw;
+		var baseQuery = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=10&genre=12&genre_exclude=0";
+		var nsfwQuery = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=10";
 
-	if((type == 'manga') || (type == 'novel')){
-		https.get("https://kitsu.io/api/edge/manga?filter%5Btext%5D=" + keyword + "&filter%5Bsubtype%5D=" + type, (resp) => {
-			let data = '';
+		if((type == 'manga') || (type == 'novel')){
+			https.get(nsfw == 1 ? nsfwQuery : baseQuery, (resp) => {
+				let data = '';
 
-			resp.on('data', (chunk) => {
-				data += chunk;
+				resp.on('data', (chunk) => {
+					data += chunk;
+				});
+
+				resp.on('end', () => {
+					var parsedData = JSON.parse(data);
+					var results = parsedData.results;
+					
+					console.log(results[0]);
+					res.render('requests/index', {results: results});
+				});
+			}).on('error', (err) => {
+				console.log("Error: " + err.message);
 			});
-
-			resp.on('end', () => {
-				var parsedData = JSON.parse(data);
-				var results = parsedData.data;
-				var links = parsedData.links;
-				console.log(results[0].attributes.coverImage);
-				res.render('results/index', {results: results, links: links});
-			});
-		}).on('error', (err) => {
-			console.log("Error: " + err.message);
-		});
+		};
 	};
 });
 
-router.get('/results', function(req,res){
-	res.render('results/index');
-});
+router.get('/request/show', function(req,res){
+	var id = req.query.id;
+	https.get("https://api.jikan.moe/v3/manga/"+ id + "/recommendations", (resp) => {
+		let data = '';
 
-router.get('/request', function(req,res){
-	res.render('requests/index');
+		resp.on('data', (chunk) => {
+			data += chunk;
+		});
+
+		resp.on('end', () => {
+			var parsedData = JSON.parse(data);
+			var recommendations = parsedData.recommendations;
+			
+			// console.log(recommendations);
+			res.render('requests/show', {recs: recommendations});
+		});
+	}).on('error', (err) => {
+		console.log("Error: " + err.message);
+		res.redirect('/request');
+	});
 });
 
 module.exports = router;

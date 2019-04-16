@@ -6,23 +6,14 @@
 </div>
 
 <div class="card" id="reqForm">
-	<form id="searchForm" class="card-body" action="/search" method="get">
+	<form id="searchForm" class="card-body" action="/request" method="get">
 		<div class="form-group">
-			<label for="title">Title</label>
-			<input type="text" class="form-control" id="title" name="title" placeholder="Enter title:">
+			<label for="keyword">Content Search:</label>
+			<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Enter content to search for:">
 		</div>
 
 		<div class="form-group">
-			<label for="author">Author:</label>
-			<input type="text" class="form-control" id="author" name="author" placeholder="Enter author name:">
-		</div>
-
-		<div class="form-group">
-			<label for="genre">Genre</label>
-			<input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre:">
-		</div>
-
-		<div class="form-group">
+			<p>Type:</p>
 			<div class="form-check form-check-inline">
 				<input class="form-check-input" type="checkbox" id="ebook" name="media" value="ebook">
 				<label class="form-check-label" for="ebook">Ebook</label>
@@ -39,8 +30,28 @@
 			</div>
 		</div>
 
+		<div class="form-group">
+			<p>NSFW:</p>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" id="nsfw" name="nsfw" value=1>
+				<label class="form-check-label" for="nsfw">Include NSFW material</label>
+			</div>
+		</div>
+
 		<button type="submit" class="btn btn-secondary btn-lg">Search</button>
 	</form>
+</div>
+
+<div id="results">
+	<% if(typeof results != "undefined"){ %>
+		<% console.log(results); %>
+		<% results.forEach(function(item){ %>
+			<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
+			<p>Type: <%= item.type %></p>
+			<img src=<%= item.image_url %>>
+			<hr>
+		<% }); %>
+	<% }; %>
 </div>
 
 <% include ../partials/footer %>
