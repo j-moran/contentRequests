@@ -1,18 +1,23 @@
 <% include ../partials/header %>
 <% include ../partials/sidebar %>
 
-<p><% console.log(result.toString()); %></p>
+<% results.forEach(function(item){ %>
+	<% if(item.attributes.titles.en){ %>
+		<p>Title: <%= item.attributes.titles.en %></p>
+	<% } else { %>
+		<p>Title: <%= item.attributes.titles.en_jp %></p>
+	<% }; %>
+
+	<img src=<%= item.attributes.posterImage.tiny %>>
+	<p>Type: <%= item.attributes.subtype %></p>
+	<hr>
+<% }); %>
+
+<a href=<%= links.first %>>First</a>
+<a href=<%= links.next %>>Next</a>
+<a href=<%= links.last %>>Last</a>
 
 <% include ../partials/footer %>
-
-
-
-
-
-
-
-
-
 
 
 

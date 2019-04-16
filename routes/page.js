@@ -15,7 +15,7 @@ router.get('/profile', function(req,res){
 router.get('/search', function(req,res){
 	var keyword = encodeURI(req.query.title);
 	var type = (req.query.media);
-	var results;
+
 	if((type == 'manga') || (type == 'novel')){
 		https.get("https://kitsu.io/api/edge/manga?filter%5Btext%5D=" + keyword + "&filter%5Bsubtype%5D=" + type, (resp) => {
 			let data = '';
@@ -25,8 +25,11 @@ router.get('/search', function(req,res){
 			});
 
 			resp.on('end', () => {
-				results = JSON.parse(data).data;
-				res.render('results/index', {result: results});
+				var parsedData = JSON.parse(data);
+				var results = parsedData.data;
+				var links = parsedData.links;
+				console.log(results[0].attributes.coverImage);
+				res.render('results/index', {results: results, links: links});
 			});
 		}).on('error', (err) => {
 			console.log("Error: " + err.message);
