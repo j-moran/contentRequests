@@ -68,26 +68,3 @@ router.get('/request/show', function(req,res){
 });
 
 module.exports = router;
-
-
-
-/*axios.get("https://kitsu.io/api/edge/manga?filter%5Btext%5D=" + keyword + "&filter%5Bsubtype%5D=" + type)
-			.then(response => {
-				var result = response.data.data;
-
-				result.forEach(function(item){
-					if(item.attributes.titles.en){
-						console.log(item.attributes.titles.en);
-					} else {
-						console.log(item.attributes.titles.en_jp);
-					};
-					
-					console.log(item.attributes.subtype);
-					console.log("https://kitsu.io/manga/" + item.attributes.slug);
-					console.log('--------------------------------');
-				});
-				// console.log(response.data.synopsis);
-			})
-			.catch(error => {
-				console.log(error);
-			}); */
