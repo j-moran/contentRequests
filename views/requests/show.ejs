@@ -4,17 +4,22 @@
 <div class="container-fluid">
 	
 	<% if(typeof query != "undefined"){ %>
-		<p>Title: <%= query.title %></p>	
-		<p>Type: <%= query.type %></p>
-		<img src=<%= query.imageURL %>>
-		<p>Synopsis: <%= query.synopsis %></p>
-		<div>
-			<% if((query.type == 'Manga') || (query.type == 'Novel')){ %>
-				<a class="btn btn-info" href="https://myanimelist.net/manga/<%= query.id %>" target="_blank">MAL</a>
-			<% }; %>
-			
-			<a class="btn btn-primary" href="#">Request</a>
-			<a href="#"></a>
+		<div class="card">
+			<div class="row">
+				<img class="col-2" src=<%= query.imageURL %>>
+				<div class="col">
+					<p>Title: <%= query.title %></p>	
+					<p>Type: <%= query.type %></p>
+					<p>Synopsis: <%= query.synopsis %></p>
+					<div class="">
+						<% if((query.type == 'Manga') || (query.type == 'Novel')){ %>
+							<a class="btn btn-info" href="https://myanimelist.net/manga/<%= query.id %>" target="_blank">MAL</a>
+						<% }; %>
+						
+						<a class="btn btn-primary" href="#">Request</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	<% }; %>
 
@@ -44,7 +49,7 @@
 	<hr>
 	<br>
 
-	<button class="btn btn-secondary" onClick="goBack()">Return to previous page</button>
+	<button class="btn btn-secondary">Return to request page</button>
 
 </div>
 <% include ../partials/footer %>
