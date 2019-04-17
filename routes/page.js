@@ -46,6 +46,7 @@ router.get('/request', function(req,res){
 
 router.get('/request/show', function(req,res){
 	var id = req.query.id;
+	var query = req.query;
 	https.get("https://api.jikan.moe/v3/manga/"+ id + "/recommendations", (resp) => {
 		let data = '';
 
@@ -58,7 +59,7 @@ router.get('/request/show', function(req,res){
 			var recommendations = parsedData.recommendations;
 			
 			// console.log(recommendations);
-			res.render('requests/show', {recs: recommendations});
+			res.render('requests/show', {recs: recommendations, query: query});
 		});
 	}).on('error', (err) => {
 		console.log("Error: " + err.message);
