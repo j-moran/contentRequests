@@ -19,7 +19,7 @@ router.get('/request', function(req,res){
 		var keyword = encodeURI(req.query.keyword);
 		var type = req.query.media;
 		var nsfw = req.query.nsfw;
-		var baseQuery = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=10&genre=12&genre_exclude=0";
+		var baseQuery = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=12&genre=12&genre_exclude=0";
 		var nsfwQuery = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=10";
 
 		if((type == 'manga') || (type == 'novel')){

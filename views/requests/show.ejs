@@ -1,32 +1,44 @@
 <% include ../partials/header %>
 <% include ../partials/sidebar %>
 
-<% if(typeof results != "undefined"){ %>
-	<% console.log(results); %>
-	<% results.forEach(function(item){ %>
-		<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
-		<p>Type: <%= item.type %></p>
-		<img src=<%= item.image_url %>>
-		<hr>
-	<% }); %>
-<% }; %>
-
-<hr>
-
-<% if(typeof recs != "undefined"){ %>
-	<% if(recs.length > 0 ){ %>
-		<% for(var i = 0; i < 5; i++){ %>
-			<p>Title: <a href="/request/show?id=<%= recs[i].mal_id %>" ><%= recs[i].title %></a></p>	
-			<p>Type: <%= recs[i].type %></p>
-			<img src=<%= recs[i].image_url %>>
+<div class="container-fluid">
+	
+	<% if(typeof results != "undefined"){ %>
+		<% console.log(results); %>
+		<% results.forEach(function(item){ %>
+			<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
+			<p>Type: <%= item.type %></p>
+			<img src=<%= item.image_url %>>
 			<hr>
-		<% }; %>
-	<% } else { %>
-		<p>There are no recommendations available at this time.</p>
-		<hr>
+		<% }); %>
 	<% }; %>
-<% }; %>
 
-<button class="btn btn-secondary" onClick="goBack()">Return to previous page</button>
+	<hr>
 
+	<div class="row">
+		<% if(typeof recs != "undefined"){ %>
+			<% if(recs.length > 0 ){ %>
+				<% for(var i = 0; i < 5; i++){ %>
+					<div class="col">
+						<div class="card">
+							<img class="img-thumbnail recImg card-img-top" src=<%= recs[i].image_url %>>
+							<div class="card-body">
+								<p class="card-title">Title: <a href="/request/show?id=<%= recs[i].mal_id %>" ><%= recs[i].title %></a></p>	
+								<p class="card-text">Type: <%= recs[i].type %></p>
+							</div>
+						</div>
+					</div>
+				<% }; %>
+			<% } else { %>
+				<p>There are no recommendations available at this time.</p>
+			<% }; %>
+		<% }; %>
+	</div>
+	
+	<hr>
+	<br>
+
+	<button class="btn btn-secondary" onClick="goBack()">Return to previous page</button>
+
+</div>
 <% include ../partials/footer %>

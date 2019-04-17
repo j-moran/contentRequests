@@ -1,54 +1,61 @@
 <% include ../partials/header %>
 <% include ../partials/sidebar %>
 
-<div class="card mb-4">
-	<h2 class="card-body mx-auto">Requests</h2>	
-</div>
+<div class="container-fluid">
+	<div class="card mb-4">
+		<h2 class="card-body mx-auto">Requests</h2>	
+	</div>
 
-<div class="card" id="reqForm">
-	<form id="searchForm" class="card-body" action="/request" method="get">
-		<div class="form-group">
-			<label for="keyword">Content Search:</label>
-			<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Enter content to search for:">
-		</div>
-
-		<div class="form-group">
-			<p>Type:</p>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="ebook" name="media" value="ebook">
-				<label class="form-check-label" for="ebook">Ebook</label>
+	<div class="card" id="reqForm">
+		<form id="searchForm" class="card-body" action="/request" method="get">
+			<div class="form-group">
+				<label for="keyword">Content Search:</label>
+				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Enter content to search for:">
 			</div>
 
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="manga" name="media" value="manga">
-				<label class="form-check-label" for="manga">Manga</label>
+			<div class="form-group">
+				<p>Type:</p>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" id="ebook" name="media" value="ebook">
+					<label class="form-check-label" for="ebook">Ebook</label>
+				</div>
+
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" id="manga" name="media" value="manga">
+					<label class="form-check-label" for="manga">Manga</label>
+				</div>
+
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" id="novel" name="media" value="novel">
+					<label class="form-check-label" for="novel">Light Novel</label>
+				</div>
 			</div>
 
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="novel" name="media" value="novel">
-				<label class="form-check-label" for="novel">Light Novel</label>
+			<div class="form-group">
+				<p>NSFW:</p>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="nsfw" name="nsfw" value=1>
+					<label class="form-check-label" for="nsfw">Include NSFW material</label>
+				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<p>NSFW:</p>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="nsfw" name="nsfw" value=1>
-				<label class="form-check-label" for="nsfw">Include NSFW material</label>
-			</div>
-		</div>
+			<button type="submit" class="btn btn-secondary btn-lg">Search</button>
+		</form>
+	</div>
 
-		<button type="submit" class="btn btn-secondary btn-lg">Search</button>
-	</form>
-</div>
+	<br>
 
-<div id="results">
 	<% if(typeof results != "undefined"){ %>
-		<% console.log(results); %>
 		<% results.forEach(function(item){ %>
-			<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
-			<p>Type: <%= item.type %></p>
-			<img src=<%= item.image_url %>>
+			<div class="card">
+				<div class="row">
+					<img class="col-2" src=<%= item.image_url %>>
+					<div class="col">
+						<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
+						<p>Type: <%= item.type %></p>
+					</div>
+				</div>
+			</div>
 			<hr>
 		<% }); %>
 	<% }; %>

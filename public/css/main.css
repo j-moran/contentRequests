@@ -40,3 +40,12 @@ hr {
 #sidebarCollapse {
 	background: #38474f;
 }
+
+/* Recommendations */
+.recImg {
+	height: 350px;
+	width: 100%;
+}
+
+/* Search */
+
