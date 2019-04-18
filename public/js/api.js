@@ -1,4 +1,4 @@
-var https = require('https');
+var https 	= require('https');
 
 module.exports = {
 	call: function(request, callback){
@@ -9,12 +9,8 @@ module.exports = {
 				data += chunk;
 			});
 
-			resp.on('end', () => {
-				var parsedData = JSON.parse(data);
-				
-				// console.log(parsedData);
-				console.log("Call Completed at:" + new Date());
-				callback(parsedData);
+			resp.on('end', () => {				
+				callback(data);
 			});
 		}).on('error', (err) => {
 			console.log("Error: " + err.message);

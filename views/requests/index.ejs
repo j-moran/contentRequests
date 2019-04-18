@@ -46,19 +46,37 @@
 	<br>
 
 	<% if(typeof results != "undefined"){ %>
-		<% //console.log(results); %>
-		<div class="row">
-			<% results.forEach(function(item){ %>
-				<div class="col-2 mb-3 d-flex align-items-stretch">
-					<div class="card">
-						<img class="card-img-top my-3" src=<%= item.image_url %>>
-						<div class="card-body">
-							<p>Title: <a href="/request/show?id=<%= item.mal_id %>"><%= item.title %></a></p>	
+		<% if(results[0].title){ %>
+			<div class="row">
+				<% results.forEach(function(item){ %>
+					<div class="col-2 mb-3 d-flex align-items-stretch">
+						<div class="card">
+							<img class="card-img-top" src=<%= item.image_url %>>
+							<div class="card-body">
+								<p><a href="/request/show?id=<%= item.mal_id %>"><span><%= item.title %></span></a></p>	
+							</div>
 						</div>
 					</div>
-				</div>
-			<% }); %>
-		</div>
+				<% }); %>
+			</div>
+		<% } else if(results[0].best_book) { %>
+			<div class="row">
+				<!-- <% results.forEach(function(item){ %>  -->
+					<div class="col-3 d-flex align-items-stretch">
+						<div class="card">
+							<% if(!item.best_book.image_url.text.includes('nophoto')){ %>
+								<img class="card-img-top" src=<%= item.best_book.image_url.text %>>
+							<% } else { %>
+								<img class="card-img-top" src="https://read.macmillan.com/wp-content/uploads/2016/04/book-cover-placeholder-188x300.png">
+							<% }; %>
+							<div class="card-body">
+								<p><a href="/request/show?id=<%= item.best_book.id.text %>"><span><%= item.best_book.title.text %></span></a></p>	
+							</div>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+		<% }; %>
 	<% }; %>
 </div>
 
