@@ -3,17 +3,27 @@
 
 <div class="container-fluid">
 	
-	<% if(typeof query != "undefined"){ %>
+	<% if(typeof mangaInfo != "undefined"){ %>
 		<div class="card">
 			<div class="row">
-				<img class="col-2" src=<%= query.imageURL %>>
+				<img class="col-3" src=<%= mangaInfo.image_url %>>
 				<div class="col">
-					<p>Title: <%= query.title %></p>	
-					<p>Type: <%= query.type %></p>
-					<p>Synopsis: <%= query.synopsis %></p>
-					<div class="">
-						<% if((query.type == 'Manga') || (query.type == 'Novel')){ %>
-							<a class="btn btn-info" href="https://myanimelist.net/manga/<%= query.id %>" target="_blank">MAL</a>
+					<div class="row">
+						<h2 class="col"><span><%= mangaInfo.title %></span></h2>	
+					</div>
+					<div class="row mt-2">
+						<span class="col">Type: <%= mangaInfo.type %></span>
+						<span class="col">Author: <%= mangaInfo.authors[0].name %></span>
+					</div>
+					<p>Synopsis: <%= mangaInfo.synopsis %></p>
+					<p>Genres: 
+						<% mangaInfo.genres.forEach(function(item){ %>
+							<span class="mx-1"><%= item.name %></span>
+						<% }); %>
+					</p>
+					<div class="mb-3">
+						<% if((mangaInfo.type == 'Manga') || (mangaInfo.type == 'Novel')){ %>
+							<a class="btn btn-info mr-2" href="https://myanimelist.net/manga/<%= mangaInfo.mal_id %>" target="_blank">MAL</a>
 						<% }; %>
 						
 						<a class="btn btn-primary" href="#">Request</a>
@@ -25,17 +35,16 @@
 
 	<hr>
 
-	<h3>Recommendations from other users who read "<%= query.title %>":</h3>
+	<h3>Recommendations from other users who read "<%= mangaInfo.title %>":</h3>
 	<div class="row">
 		<% if(typeof recs != "undefined"){ %>
 			<% if(recs.length > 0 ){ %>
 				<% for(var i = 0; i < (recs.length < 6 ? recs.length : 6); i++){ %>
-					<div class="col-2">
+					<div class="col-2 d-flex align-items-stretch">
 						<div class="card">
 							<img class="img-thumbnail recImg card-img-top" src=<%= recs[i].image_url %>>
 							<div class="card-body">
 								<p class="card-title">Title: <a href="/request/show?id=<%= recs[i].mal_id %>" ><%= recs[i].title %></a></p>	
-								<p class="card-text">Type: <%= recs[i].type %></p>
 							</div>
 						</div>
 					</div>
