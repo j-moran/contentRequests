@@ -3,4 +3,8 @@ var express 	= require('express'),
 	User		= require('../models/user'),
 	Request		= require('../models/request');
 
+router.get('/login', function(req,res){
+	res.render('login');
+});
+
 module.exports = router;

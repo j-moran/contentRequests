@@ -2,26 +2,24 @@
 	<nav id="sidebar">
         <ul class="list-unstyled components">
             <li>
-                <a href="/request">Request</a>
+                <a class="text-center" href="/request">Request</a>
             </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">[USERNAME]</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <% if(currentUser){ %>
+            <li class="text-center">
+                <% if(currentUser){ %>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">[USERNAME]</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="/profile">Profile</a>
                         </li>
                         <li>
                             <a href="/logout">Logout</a>
                         </li>
-                    <% } else { %>
-                        <li>    
-                            <a href="/login">Log In</a>
-                        </li>
-                    <% }; %>
-                </ul>
+                    </ul>
+                <% } else { %>    
+                    <a href="/login">Log In</a>
+                <% }; %>
             </li>
-            <li>
+            <li class="text-center">
                 <a href="/about">About</a>
             </li>
         </ul>

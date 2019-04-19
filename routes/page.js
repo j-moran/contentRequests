@@ -33,7 +33,7 @@ router.get('/request', function(req,res){
 				res.render('requests/index', {results: searchRes.results});
 			});
 		} else if(type == 'ebook'){
-			query = "https://www.googleapis.com/books/v1/volumes?q=" + keyword + "&maxResults=15&langRestrict=en&orderBy=relevance";
+			query = "https://www.googleapis.com/books/v1/volumes?q=" + keyword + "&maxResults=15&langRestrict=en&orderBy=relevance&filter=paid-ebooks";
 
 			api.call(query, function(searchRes){
 				
