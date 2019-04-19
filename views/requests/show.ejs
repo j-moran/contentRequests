@@ -2,6 +2,41 @@
 <% include ../partials/sidebar %>
 
 <div class="container-fluid">
+
+	<% if(typeof bookInfo != "undefined"){ %>
+		<div class="card">
+			<div class="row">
+				<img class="col-3" src=<%= bookInfo.volumeInfo.imageLinks.small || bookInfo.volumeInfo.imageLinks.thumbnail %>>
+				<div class="col">
+					<div class="row">
+						<h2 class="col mt-2"><span><%= ('subtitle' in bookInfo.volumeInfo) ? bookInfo.volumeInfo.title + " - " +  bookInfo.volumeInfo.subtitle : bookInfo.volumeInfo.title %></h2>
+					</div>
+					<div class="row mt-2">
+						<span class="col">Author(s):
+							<% bookInfo.volumeInfo.authors.forEach(function(author){ %>
+								<span class="mx-1"><%= author %></span>		
+							<% }); %>
+						</span>
+						<span class="col">ISBN-13: <%= bookInfo.volumeInfo.industryIdentifiers[1].identifier %></span>
+					</div>
+					<p class="mt-2"><span>Synopsis:</span> <%= bookInfo.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); %></p>
+					<p><span>Genre(s):
+						<ul class="list-unstyled row">
+							<% if(typeof bookInfo.volumeInfo.categories != "undefined"){ %>
+								<% bookInfo.volumeInfo.categories.forEach(function(item){ %>
+									<li class="col-6"><%= item %></li>	
+								<% }); %>
+							<% }; %>
+						</ul>
+					</span></p>
+					<div class="mb-3">
+						<a class="btn btn-info mr-2" href="https://play.google.com/store/books/details?id=<%= bookInfo.id %>&source=gbs_api" target="_blank">More Info</a>
+						<a class="btn btn-primary" href="#">Request</a>
+					</div>
+				</div>
+			</div>			
+		</div>
+	<% }; %>
 	
 	<% if(typeof mangaInfo != "undefined"){ %>
 		<div class="card">
@@ -22,43 +57,40 @@
 						<% }); %>
 					</p>
 					<div class="mb-3">
-						<% if((mangaInfo.type == 'Manga') || (mangaInfo.type == 'Novel')){ %>
-							<a class="btn btn-info mr-2" href="https://myanimelist.net/manga/<%= mangaInfo.mal_id %>" target="_blank">MAL</a>
-						<% }; %>
-						
+						<a class="btn btn-info mr-2" href="https://myanimelist.net/manga/<%= mangaInfo.mal_id %>" target="_blank">MAL</a>
 						<a class="btn btn-primary" href="#">Request</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	<% }; %>
 
-	<hr>
+		<hr>
 
-	<h3>Recommendations from other users who read "<%= mangaInfo.title %>":</h3>
-	<div class="row">
-		<% if(typeof recs != "undefined"){ %>
-			<% if(recs.length > 0 ){ %>
-				<% for(var i = 0; i < (recs.length < 6 ? recs.length : 6); i++){ %>
-					<div class="col-2 d-flex align-items-stretch">
-						<div class="card">
-							<img class="recImg card-img-top" src=<%= recs[i].image_url %>>
-							<div class="card-body">
-								<p class="card-title"><a href="/request/show?id=<%= recs[i].mal_id %>" ><span><%= recs[i].title %></span></a></p>	
+		<h3>Recommendations from other users who read "<%= mangaInfo.title %>":</h3>
+		<div class="row">
+			<% if(typeof recs != "undefined"){ %>
+				<% if(recs.length > 0 ){ %>
+					<% for(var i = 0; i < (recs.length < 5 ? recs.length : 5); i++){ %>
+						<div class="col d-flex align-items-stretch">
+							<div class="card w-100">
+								<img class="recImg card-img-top" src=<%= recs[i].image_url %>>
+								<div class="card-body">
+									<p class="card-title"><a href="/request/show?id=<%= recs[i].mal_id %>" ><span><%= recs[i].title %></span></a></p>	
+								</div>
 							</div>
 						</div>
-					</div>
+					<% }; %>
+				<% } else { %>
+					<p class="col">There are no recommendations available at this time.</p>
 				<% }; %>
-			<% } else { %>
-				<p class="col">There are no recommendations available at this time.</p>
 			<% }; %>
-		<% }; %>
-	</div>
+		</div>
+	<% }; %>
 	
 	<hr>
 	<br>
 
-	<button class="btn btn-secondary">Return to request page</button>
+	<button class="btn btn-secondary" onClick="goBack()">Return to previous page</button>
 
 </div>
 <% include ../partials/footer %>

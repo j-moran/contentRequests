@@ -25,7 +25,7 @@ router.get('/request', function(req,res){
 
 		if((type == 'manga') || (type == 'novel')){
 			var nsfw = req.query.nsfw;
-			query = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=12";
+			query = "https://api.jikan.moe/v3/search/manga?q=" + keyword + "&type=" + type + "&limit=15";
 			
 			api.call(nsfw == 1 ? query : query + "&genre=12&genre_exclude=0", function(searchRes){
 				var searchRes = JSON.parse(searchRes);
@@ -33,23 +33,14 @@ router.get('/request', function(req,res){
 				res.render('requests/index', {results: searchRes.results});
 			});
 		} else if(type == 'ebook'){
-			query = "https://www.goodreads.com/search.xml?key=" + process.env.GR_KEY + "&q=" + keyword;
+			query = "https://www.googleapis.com/books/v1/volumes?q=" + keyword + "&maxResults=15&langRestrict=en&orderBy=relevance";
 
 			api.call(query, function(searchRes){
-				var options = {
-					compact: true,
-					trim: true,
-					nativeType: true,
-					ignoreDeclaration: true,
-					ignoreDoctype: true, 
-					spaces: 2,
-					textKey: 'text',
-					attributesKey: 'attributes'
-				};
-				var searchRes = JSON.parse(convert.xml2json(searchRes, options));
-				searchRes = searchRes.GoodreadsResponse.search.results.work;
 				
-				console.log(searchRes[5].best_book.image_url.text);
+				var searchRes = JSON.parse(searchRes);
+				searchRes = searchRes.items;
+				
+				// console.log(searchRes);
 				res.render('requests/index', {results: searchRes});
 			});
 		};
@@ -58,17 +49,28 @@ router.get('/request', function(req,res){
 
 router.get('/request/show', function(req,res){
 	var id = req.query.id;
-	var query = "https://api.jikan.moe/v3/manga/"+ id;
-	api.call(query, function(info){
-		var info = JSON.parse(info);
-		query += "/recommendations";
-		
-		api.call(query, function(newRecs){
-			var newRecs = JSON.parse(newRecs);
-			
-			res.render('requests/show', {recs: newRecs.recommendations, mangaInfo: info});			
+
+	if(id.match(/[a-z]/i)){
+		query = "https://www.googleapis.com/books/v1/volumes/" + id;
+
+		api.call(query, function(info){
+			var info = JSON.parse(info);
+			res.render('requests/show', {bookInfo: info});
 		});
-	});
+	} else {
+		query = "https://api.jikan.moe/v3/manga/"+ id;
+		
+		api.call(query, function(info){
+			var info = JSON.parse(info);
+			query += "/recommendations";
+			
+			api.call(query, function(newRecs){
+				var newRecs = JSON.parse(newRecs);
+				
+				res.render('requests/show', {recs: newRecs.recommendations, mangaInfo: info});			
+			});
+		});
+	};
 });
 
 module.exports = router;
