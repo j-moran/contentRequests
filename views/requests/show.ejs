@@ -6,35 +6,60 @@
 	<% if(typeof bookInfo != "undefined"){ %>
 		<div class="card">
 			<div class="row">
-				<img class="col-3" src=<%= bookInfo.volumeInfo.imageLinks.small || bookInfo.volumeInfo.imageLinks.thumbnail %>>
+				<img class="col-3 h-50 mx-3 my-3" src=<%= bookInfo.image_url.text %>>
 				<div class="col">
 					<div class="row">
-						<h2 class="col mt-2"><span><%= ('subtitle' in bookInfo.volumeInfo) ? bookInfo.volumeInfo.title + " - " +  bookInfo.volumeInfo.subtitle : bookInfo.volumeInfo.title %></h2>
+						<h2 class="col mt-3"><span><%= bookInfo.title.text %></h2>
 					</div>
 					<div class="row mt-2">
 						<span class="col">Author(s):
-							<% bookInfo.volumeInfo.authors.forEach(function(author){ %>
-								<span class="mx-1"><%= author %></span>		
-							<% }); %>
-						</span>
-						<span class="col">ISBN-13: <%= bookInfo.volumeInfo.industryIdentifiers[1].identifier %></span>
-					</div>
-					<p class="mt-2"><span>Synopsis:</span> <%= bookInfo.volumeInfo.description.replace(/(<([^>]+)>)/ig,""); %></p>
-					<p><span>Genre(s):
-						<ul class="list-unstyled row">
-							<% if(typeof bookInfo.volumeInfo.categories != "undefined"){ %>
-								<% bookInfo.volumeInfo.categories.forEach(function(item){ %>
-									<li class="col-6"><%= item %></li>	
+							<% if(bookInfo.authors.author.length > 1){ %>
+								<% bookInfo.authors.author.forEach(function(author){ %>
+									<span class="mx-1"><%= author.name.text %></span>		
 								<% }); %>
+							<% } else { %>
+								<span class="mx-1"><%= bookInfo.authors.author.name.text %></span>
 							<% }; %>
-						</ul>
-					</span></p>
-					<div class="mb-3">
-						<a class="btn btn-info mr-2" href="https://play.google.com/store/books/details?id=<%= bookInfo.id %>&source=gbs_api" target="_blank">More Info</a>
-						<a class="btn btn-primary" href="#">Request</a>
+						</span>
+						<span class="col">ISBN-13: <%= bookInfo.isbn13.text %></span>
+					</div>
+					<p class="mt-2"><span>Synopsis:</span> <%= bookInfo.description.text.replace(/(<([^>]+)>)/ig, "") %></p>
+					<div class="row">
+						<span class="col-2 mx-2 mb-3">Request Links:</span>
+						<a href="#" class="col-2 btn btn-secondary mx-2 mb-3">Request</a>
+					</div>
+					<div class="row">
+						<span class="col-2 mx-2 mb-3">Purchase Links:</span>
+						<% for(var i = 0; i < 2; i++){ %>
+							<a href="<%= bookInfo.buy_links.buy_link[i].link.text %>?book_id=<%= bookInfo.id.text %>" class="col-2 btn btn-dark mx-2 mb-3" target="_blank"><span><%= bookInfo.buy_links.buy_link[i].name.text %></span></a>
+						<% }; %>
 					</div>
 				</div>
 			</div>			
+		</div>
+
+		<hr>
+
+		<h3>Readers also recommend:</h3>
+		
+		<hr>
+		
+		<div class="row">
+			<% if(bookInfo.similar_books.book.length > 0 ){ %>
+				<% for(var i = 0; i < (bookInfo.similar_books.book.length < 5 ? bookInfo.similar_books.book.length : 10); i += 2){ %>
+					<div class="col d-flex align-items-stretch">
+						<div class="card w-100">
+							<img class="card-img-top" src=<%= bookInfo.similar_books.book[i].image_url.text %>>
+							<div class="card-body">
+								<p><span><a href="/request/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><%= bookInfo.similar_books.book[i].title.text %></a></span></p>
+								<p><span>By: <%= bookInfo.similar_books.book[i].authors.author.name.text %></span></p>
+							</div>
+						</div>
+					</div>
+				<% }; %>
+			<% } else { %>
+				<p class="col">There are no recommendations available at this time.</p>
+			<% }; %>
 		</div>
 	<% }; %>
 	
@@ -67,6 +92,9 @@
 		<hr>
 
 		<h3>Recommendations from other users who read "<%= mangaInfo.title %>":</h3>
+
+		<hr>
+
 		<div class="row">
 			<% if(typeof recs != "undefined"){ %>
 				<% if(recs.length > 0 ){ %>

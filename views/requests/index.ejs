@@ -46,7 +46,7 @@
 	<br>
 
 	<% if(typeof results != "undefined"){ %>
-		<% if(results[0].title){ %>
+		<% if((media == 'manga') || (media == 'novel')){ %>
 			<div class="row">
 				<% for(var i = 0; i < results.length; i++){ %>
 
@@ -59,27 +59,28 @@
 						<div class="card w-100">
 							<img class="card-img-top" src=<%= results[i].image_url %>>
 							<div class="card-body">
-								<p><a href="/request/show?id=<%= results[i].mal_id %>"><span><%= results[i].title %></span></a></p>	
+								<p><a href="/request/show?media=<%= media %>&id=<%= results[i].mal_id %>"><span><%= results[i].title %></span></a></p>	
 							</div>
 						</div>
 					</div>
 				<% }; %>
 			</div>
-		<% } else if(results[0].kind) { %>
+		<% } else if(media == 'ebook') { %>
 
 			<div class="row">
 				<% for(var i = 0; i < results.length; i++){ %>
 
-					<% if((i > 0) && (i % 5 == 0)){ %>
+					<% if((i > 0) && (i % 6 == 0)){ %>
 						</div>
 						<div class="row my-3">
 					<% }; %>
 
 					<div class="col d-flex align-items-stretch">
 						<div class="card w-100">
-							<img class="card-img-top" src=<%= results[i].volumeInfo.imageLinks.thumbnail %>>
+							<img class="card-img-top" src=<%= results[i].best_book.image_url.text %>>
 							<div class="card-body">
-								<p><a href="/request/show?id=<%= results[i].id %>"><span><%= ('subtitle' in results[i].volumeInfo) ? results[i].volumeInfo.title + " - " +  results[i].volumeInfo.subtitle : results[i].volumeInfo.title %></span></a></p>	
+								<p><span><a href="/request/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><%= results[i].best_book.title.text %></a></span></p>
+								<p><span>By: <%= results[i].best_book.author.name.text %></span></p>
 							</div>
 						</div>
 					</div>
