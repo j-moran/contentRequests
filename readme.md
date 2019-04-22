@@ -7,7 +7,7 @@ ___Note: This site is a work in progress. I am working on getting things running
 ## Requirements
 1. Node.JS 
 2. MongoDB
-3. (Thats pretty much it!)
+3. Goodreads API key
 
 ## Setup
 1. Install Node.JS and MongoDB if you haven't already. Make sure that both applications have been added to your PATH.
@@ -26,3 +26,4 @@ ___Note: This site is a work in progress. I am working on getting things running
 * passport
 * passport-local
 * passport-local-mongoose
+* xml-js
