@@ -4,7 +4,8 @@ var express 	= require('express'),
 	convert 	= require('xml-js'),
 	User		= require('../models/user'),
 	Request		= require('../models/request'),
-	api 		= require('../public/js/api');
+	api 		= require('../public/js/api'),
+	middleware  = require('../middleware');
 
 router.get('/', function(req,res){
 	res.render('landing');
@@ -14,7 +15,7 @@ router.get('/profile', function(req,res){
 	res.render('users/index');
 });
 
-router.get('/request', function(req,res){
+router.get('/request', middleware.isLoggedIn, function(req,res){
 	var keyword = encodeURI(req.query.keyword);
 	var type = req.query.media;
 	var query;

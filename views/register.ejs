@@ -1,0 +1,51 @@
+<% include ./partials/header %>
+<% include ./partials/sidebar %>
+
+<div class="card w-50 mx-auto">
+	<div class="card-body">
+
+		<h2 class="text-center">Register</h2>
+		<hr>
+
+		<form class="form" action="/register" method="post">
+				<div class="form-group row">
+					<label class="col-2 control-label" for="firstName">First Name:</label>
+					<input class="col-7 form-control mx-auto" type="text" name="firstName" placeholder="Enter first name...">
+				</div>
+
+				<div class="form-group row">
+					<label class="col-2 control-label" for="lastName">Last Name:</label>
+					<input class="col-7 form-control mx-auto" type="text" name="lastName" placeholder="Enter last name...">
+				</div>
+
+				<div class="form-group row">
+					<label class="col-2 control-label" for="email">E-Mail:</label>
+					<input class="col-7 form-control mx-auto" type="text" name="email" placeholder="Enter e-mail address...">
+				</div>
+
+				<div class="form-group row">
+					<label class="col-2 control-label" for="username">Username:</label>
+					<input class="col-7 form-control mx-auto" type="text" name="username" placeholder="Enter desired username...">
+				</div>
+
+				<div class="form-group row">
+					<label class="col-2 control-label" for="password">Password:</label>
+					<input class="col-7 form-control mx-auto" type="password" name="password" placeholder="Enter password...">
+				</div>
+
+				<div class="form-group row">
+					<label class="col-2 control-label" for="pass-again">Re-Enter:</label>
+					<input class="col-7 form-control mx-auto" type="password" name="pass-again" placeholder="Re-enter password...">
+				</div>
+
+				<hr>
+
+				<div class="form-group row">
+					<a class="col-4 mx-auto btn btn-dark btn-lg" href="/">Cancel</a>
+					<button class="btn btn-secondary btn-lg col-4 offset-1 mx-auto">Sign Up!</button>
+				</div>
+			</form>
+	</div>
+</div>
+
+<% include ./partials/footer %>

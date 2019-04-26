@@ -2,18 +2,26 @@
 <% include ./partials/sidebar %>
 
 	<div class="card w-50 mx-auto">
-		<form class="card-body mx-aut text-center" action="/login" method="post">
-			<div class="form-group">
-				<label class="control-label">Username:</label>
-				<input class="col-9 form-control mx-auto" type="text" name="username" placeholder="Enter Username:" autofocus required>
+		<form class="card-body text-center" action="/login" method="post">
+
+			<h2 class="text-center">Login</h2>
+			<hr>
+
+			<div class="form-group row">
+				<label class="col-2 control-label">Username:</label>
+				<input class="col-7 form-control mx-auto" type="text" name="username" placeholder="Enter Username:" autofocus required>
 			</div>
-			<div class="form-group">
-				<label class="control-label">Password:</label>
-				<input class="col-9 form-control mx-auto" type="password" name="password" placeholder="Enter password:">
+
+			<div class="form-group row">
+				<label class="col-2 control-label">Password:</label>
+				<input class="col-7 form-control mx-auto" type="password" name="password" placeholder="Enter password:">
 			</div>
-			<div class="form-group">
-				<button class="btn btn-dark btn-lg col-4 mx-1">Log In</button>
-				<a class="btn btn-secondary btn-lg col-4 mx-1" href="/register">Register</a>
+
+			<hr>
+			
+			<div class="form-group row">
+				<a class="btn btn-secondary btn-lg col-4 mx-auto" href="/register">Register</a>
+				<button class="btn btn-dark btn-lg col-4 mx-auto">Log In</button>
 			</div>
 		</form>
 	</div>

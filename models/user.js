@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 
 
 let userSchema = new mongoose.Schema({
@@ -11,6 +12,6 @@ let userSchema = new mongoose.Schema({
 	created: {type: Date, default: Date.now}
 });
 
-//userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', userSchema);

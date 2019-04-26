@@ -4,6 +4,9 @@
             <li>
                 <a class="text-center" href="/request">Request</a>
             </li>
+            
+            <hr>
+
             <li class="text-center">
                 <% if(currentUser){ %>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">[USERNAME]</a>
@@ -11,18 +14,41 @@
                         <li>
                             <a href="/profile">Profile</a>
                         </li>
+
                         <li>
                             <a href="/logout">Logout</a>
                         </li>
                     </ul>
+                    <hr>
                 <% } else { %>    
                     <a href="/login">Log In</a>
+                    <hr>
                 <% }; %>
             </li>
+
             <li class="text-center">
                 <a href="/about">About</a>
             </li>
+            
+            <hr>
         </ul>
     </nav>
 
 	<div id="content">
+
+            <% if(error && error.length > 0){ %>
+                <div class="card mb-3 col-8 mx-auto">
+                    <div class="alert alert-dismissable text-center mt-2" role="alert">
+                        <%= error %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick="location.reload()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            <% }; %>
+            <% if(success && success.length > 0){ %>
+                <div class="card mb-3 col-8 mx-auto">
+                    <div class="alert alert-dismissable text-center mt-2" role="alert">
+                        <%= success %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick="location.reload()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            <% }; %>
