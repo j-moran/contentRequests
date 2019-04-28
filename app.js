@@ -17,7 +17,8 @@ require('dotenv').config();
 //Route Variables
 //=======================
 var pageRoutes 		= require('./routes/page'),
-	authRoutes 		= require('./routes/auth');
+	authRoutes 		= require('./routes/auth'),
+	requestRoutes 	= require('./routes/request');
 
 //=======================
 //Database Setup
@@ -50,7 +51,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
-	console.log(res);
+	console.log(res.locals);
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
@@ -59,6 +60,7 @@ app.use(function(req,res,next){
 
 app.use(pageRoutes);
 app.use(authRoutes);
+app.use(requestRoutes);
 
 //=======================
 //Server Settings

@@ -3,11 +3,13 @@ $('#searchForm').on('submit', function(e){
 		e.preventDefault();
 		alert('Please choose a type:');
 		return false;
-	} else if($("input[name=media]:checked").length !== 1){
-		e.preventDefault();
-		alert('Please choose only one type:');
-		return false;
 	};
+});
+
+$(document).ready(function(){
+	$('input[name=media]').on('change', function() {
+	    $('input[name=media]').not(this).prop('checked', false);  
+	});
 });
 
 function goBack(){

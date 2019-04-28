@@ -40,9 +40,9 @@ router.post('/register', function(req,res){
 		user.permissions = '';
 		user.save();
 
-		console.log(user);
+		// console.log(user);
 		passport.authenticate('local')(req,res,function(){
-			req.flash("ssuccess", "User created successfully!");
+			req.flash("success", "User created successfully!");
 			res.redirect('/');
 		});
 

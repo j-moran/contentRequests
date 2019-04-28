@@ -2,17 +2,21 @@
 	<nav id="sidebar">
         <ul class="list-unstyled components">
             <li>
-                <a class="text-center" href="/request">Request</a>
+                <a class="text-center" href="/search">Search</a>
             </li>
             
             <hr>
 
             <li class="text-center">
                 <% if(currentUser){ %>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">[USERNAME]</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= currentUser.username %></a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="/profile">Profile</a>
+                        </li>
+
+                        <li>
+                            <a href="/<%= currentUser.username %>/myrequests">My Requests</a>
                         </li>
 
                         <li>

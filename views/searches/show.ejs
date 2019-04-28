@@ -51,7 +51,7 @@
 						<div class="card w-100">
 							<img class="card-img-top" src=<%= bookInfo.similar_books.book[i].image_url.text %>>
 							<div class="card-body">
-								<p><span><a href="/request/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><%= bookInfo.similar_books.book[i].title.text %></a></span></p>
+								<p><span><a href="/search/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><%= bookInfo.similar_books.book[i].title.text %></a></span></p>
 								<p><span>By: <%= bookInfo.similar_books.book[i].authors.author.name.text %></span></p>
 							</div>
 						</div>

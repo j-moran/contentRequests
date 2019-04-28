@@ -11,17 +11,19 @@ router.get('/', function(req,res){
 	res.render('landing');
 });
 
-router.get('/profile', function(req,res){
+router.get('/profile',middleware.isLoggedIn, function(req,res){
 	res.render('users/index');
 });
 
-router.get('/request', middleware.isLoggedIn, function(req,res){
+//user reqs
+
+router.get('/search', middleware.isLoggedIn, function(req,res){
 	var keyword = encodeURI(req.query.keyword);
 	var type = req.query.media;
 	var query;
 
 	if(Object.keys(req.query).length === 0){
-		res.render('requests/index');
+		res.render('searches/index');
 	} else{
 
 		if((type == 'manga') || (type == 'novel')){
@@ -31,7 +33,7 @@ router.get('/request', middleware.isLoggedIn, function(req,res){
 			api.call(nsfw == 1 ? query : query + "&genre=12&genre_exclude=0", function(searchRes){
 				var searchRes = JSON.parse(searchRes);
 
-				res.render('requests/index', {results: searchRes.results, media: type});
+				res.render('searches/index', {results: searchRes.results, media: type});
 			});
 		} else if(type == 'ebook'){
 			query = "https://www.goodreads.com/search.xml?key=" + process.env.GR_KEY + "&q=" + keyword;
@@ -51,13 +53,13 @@ router.get('/request', middleware.isLoggedIn, function(req,res){
 				searchRes = searchRes.GoodreadsResponse.search.results.work;
 
 				// console.log(searchRes[0].best_book.attributes.image_url);
-				res.render('requests/index', {results: searchRes, media: type});
+				res.render('searches/index', {results: searchRes, media: type});
 			});
 		};
 	};
 });
 
-router.get('/request/show', function(req,res){
+router.get('/search/show', function(req,res){
 	var id = req.query.id;
 	var media = req.query.media;
 
@@ -71,7 +73,7 @@ router.get('/request/show', function(req,res){
 			api.call(query, function(newRecs){
 				var newRecs = JSON.parse(newRecs);
 				
-				res.render('requests/show', {recs: newRecs.recommendations, mangaInfo: info});			
+				res.render('searches/show', {recs: newRecs.recommendations, mangaInfo: info});			
 			});
 		});
 	} else if(media == 'ebook'){
@@ -93,7 +95,7 @@ router.get('/request/show', function(req,res){
 			info = info.GoodreadsResponse.book;
 
 			// console.log(info);
-			res.render('requests/show', {bookInfo: info, media: media}); 
+			res.render('searches/show', {bookInfo: info, media: media}); 
 		});
 	};
 });

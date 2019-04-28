@@ -5,6 +5,7 @@ let requestSchema = new mongoose.Schema({
 	title: 	String,
 	id: 	String,
 	link: 	String,
+	filled: Boolean,
 	dateCreated: {type: Date, default: Date.now}
 });
 
