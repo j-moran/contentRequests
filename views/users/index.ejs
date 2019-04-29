@@ -1,6 +1,20 @@
 <% include ../partials/header %>
 <% include ../partials/sidebar %>
 
-<p>Hello <%= currentUser.username %></p>
+<div class="card">
+	<div class="card-body">
+			<div class="row">
+				<div class="col">
+					<img class="img-thumbnail rounded-circle" src="https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg">
+				</div>
+				<div class="col-10">
+					<h1><%= currentUser.username %>'s Profile:</h1>
+					<hr>
+					<h5>Name: <span><%= currentUser.firstName %> <%= currentUser.lastName %></span></h5>
+					<h5><span>E-Mail: <%= currentUser.email %></span></h5>
+				</div>
+			</div>
+	</div>
+</div>
 
 <% include ../partials/footer %>
