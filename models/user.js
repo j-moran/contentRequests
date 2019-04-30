@@ -8,6 +8,7 @@ let userSchema = new mongoose.Schema({
 	firstName: String,
 	lastName: String,
 	email: String,
+	imageURL: String,
 	permissions: [],
 	created: {type: Date, default: Date.now}
 });

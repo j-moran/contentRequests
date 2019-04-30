@@ -11,11 +11,7 @@ router.get('/', function(req,res){
 	res.render('landing');
 });
 
-router.get('/profile',middleware.isLoggedIn, function(req,res){
-	res.render('users/index');
-});
-
-//user reqs
+// SEARCH ROUTES
 
 router.get('/search', middleware.isLoggedIn, function(req,res){
 	var keyword = encodeURI(req.query.keyword);

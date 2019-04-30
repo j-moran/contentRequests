@@ -2,17 +2,78 @@
 <% include ../partials/sidebar %>
 
 <div class="card">
-	<div class="card-header">
-		<h1><%= currentUser.username %></h1>
-		<hr>
-	</div>
-
-	<form class="card-body">
-		<div class="form-group">
-			<label for="firstName">First Name:</label>
-			<input class="form-control" type="text" name="firstName" placeholder="<%= currentUser.firstName %>">
+	<div class="row align-items-center">
+		<div class="col align  ">
+			<img class="img-thumbnail rounded-circle ml-4" src="https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg">
 		</div>
-	</form>
+		<div class="col-10">
+
+			<form class="card-body">
+				<h1>Edit <%= currentUser.username %>'s Profile:</h1>
+				<hr>
+				<div class="form-group">
+					<label for="firstName">First Name:</label>
+					<input class="form-control col-4" type="text" name="firstName" value="<%= currentUser.firstName %>">
+				</div>
+
+				<div class="form-group">
+					<label for="lastName">Last Name:</label>
+					<input class="form-control col-4" type="text" name="lastName" value="<%= currentUser.lastName %>">
+				</div>
+
+				<div class="form-group">
+					<label for="email">E-Mail:</label>
+					<input class="form-control col-4" type="text" name="email" value="<%= currentUser.email %>">
+				</div>
+				
+				<div class="form-group">
+					<label for="imageURL">Profile Image URL:</label>
+					<input class="form-control col-4" type="text" name="imageURL" value="">
+				</div>
+
+				<div class="form-group">
+					<button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">Change Password</button>
+				</div>
+
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					    	<div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalCenterTitle">Change Password</h5>
+					    	</div>
+					    	<div class="modal-body">
+					        	<div class="form-group">
+									<label for="oldPass">Old Password:</label>
+									<input class="form-control" type="password" name="oldPass" placeholder="Enter old password...">
+								</div>
+
+								<div class="form-group">
+									<label for="newPass">New Password:</label>
+									<input class="form-control" type="password" name="newPass" placeholder="Enter new password...">
+								</div>
+
+								<div class="form-group">
+									<label for="newPassAgain">Re-Enter Password:</label>
+									<input class="form-control" type="password" name="newPassAgain" placeholder="Enter new password again...">
+								</div>
+					    	</div>
+					    	<div class="modal-footer">
+						        <button type="button" class="btn btn-cancel" data-dismiss="modal">Close</button>
+						        <button type="button" class="btn btn-dark">Save changes</button>
+					    	</div>
+					    </div>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="form-group">
+					<a class="btn btn-cancel btn-lg mr-1" href="/profile"><span>Cancel Changes</span></a>
+					<button class="btn btn-dark btn-lg" type="submit">Save Changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <% include ../partials/footer %>

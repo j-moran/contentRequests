@@ -4,6 +4,9 @@ var express 	= require('express'),
 	Request		= require('../models/request'),
 	middleware  = require('../middleware');
 
+router.get('/myrequests', function(req,res){
+	res.render('requests/index');
+});
 
 
 module.exports = router;

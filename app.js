@@ -16,9 +16,10 @@ require('dotenv').config();
 //=======================
 //Route Variables
 //=======================
-var pageRoutes 		= require('./routes/page'),
+var searchRoutes	= require('./routes/search'),
 	authRoutes 		= require('./routes/auth'),
-	requestRoutes 	= require('./routes/request');
+	userRoutes 		= require('./routes/user'),
+	reqRoutes		= require('./routes/request');
 
 //=======================
 //Database Setup
@@ -39,11 +40,6 @@ app.use(require('express-session')({
 	saveUninitialized: false
 }));
 
-// app.use((req, res, next) => {
-//     req.session.referrer = req.protocol + '://' + req.get('host') + req.originalUrl;
-//     next();
-// });
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -57,9 +53,10 @@ app.use(function(req,res,next){
 	next();
 });
 
-app.use(pageRoutes);
+app.use(searchRoutes);
 app.use(authRoutes);
-app.use(requestRoutes);
+app.use(userRoutes);
+app.use(reqRoutes);
 
 //=======================
 //Server Settings
