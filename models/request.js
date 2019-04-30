@@ -6,6 +6,7 @@ let requestSchema = new mongoose.Schema({
 	id: 	String,
 	link: 	String,
 	filled: Boolean,
+	requester: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 	dateCreated: {type: Date, default: Date.now}
 });
 

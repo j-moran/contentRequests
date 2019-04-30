@@ -4,8 +4,14 @@ var express 	= require('express'),
 	Request		= require('../models/request'),
 	middleware  = require('../middleware');
 
-router.get('/myrequests', function(req,res){
+router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 	res.render('requests/index');
+});
+
+router.post('/myrequests', function(req,res){
+	console.log(req.body);
+	req.flash("success", "Request submitted successfully!");
+	res.redirect('/myrequests');
 });
 
 

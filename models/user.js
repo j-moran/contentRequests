@@ -10,6 +10,7 @@ let userSchema = new mongoose.Schema({
 	email: String,
 	imageURL: String,
 	permissions: [],
+	requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request'}],
 	created: {type: Date, default: Date.now}
 });
 

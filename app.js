@@ -58,6 +58,8 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(reqRoutes);
 
+seedDB();
+
 //=======================
 //Server Settings
 //=======================
