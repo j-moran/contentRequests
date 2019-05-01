@@ -37,7 +37,6 @@ router.post('/register', function(req,res){
 		user.firstName = req.body.firstName;
 		user.lastName = req.body.lastName;
 		user.email = req.body.email;
-		user.permissions = '';
 		user.save();
 
 		// console.log(user);

@@ -9,7 +9,8 @@ var express 		= require('express')
 	passport 		= require('passport'),
 	LocalStrategy 	= require('passport-local').Strategy,
 	User			= require('./models/user'),
-	Request			= require('./models/request');
+	Request			= require('./models/request'),
+	seedDB 			= require('./scripts/seed');
 
 require('dotenv').config();
 
