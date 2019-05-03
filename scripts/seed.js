@@ -1,14 +1,19 @@
 function seedDB(){
-	if(!User.find({"username" : "admin"})){
-		User.register({username: 'admin'}, 'password', function(err, user){
-			if(err){
-				console.log(err);
-			};
-			user.permissions = ['admin'];
-			user.save();
-			console.log('User created');
-		});
-	};
+	User.find({"username" : "admin"}, function(user,err){
+		if(!user){
+			User.register({username: 'admin'}, 'password', function(err, user){
+				if(err){
+					return false;
+				};
+				user.permissions = ['admin'];
+				user.firstLogOn = true;
+				console.log(user);
+				user.save();
+				console.log('User created');
+			});
+		};
+	});
 };
 
 module.exports = seedDB;
+		

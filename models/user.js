@@ -11,6 +11,7 @@ let userSchema = new mongoose.Schema({
 	imageURL: String,
 	permissions: [],
 	requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request'}],
+	firstLogOn: Boolean,
 	created: {type: Date, default: Date.now}
 });
 
