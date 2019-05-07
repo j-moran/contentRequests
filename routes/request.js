@@ -5,15 +5,25 @@ var express 	= require('express'),
 	middleware  = require('../middleware');
 
 router.get('/myrequests', middleware.isLoggedIn, function(req,res){
-	res.render('requests/index');
+	User.findOne({username: req.user.username.toLowerCase()}).populate('requests').exec(function(err, requests){
+		if(err){
+			console.log(err);
+		};
+
+		var requests = JSON.stringify(requests, null, "\t");
+
+		console.log(requests);
+		res.render('requests/index', {requests: requests});
+	});
 });
 
 router.post('/myrequests', function(req,res){
+	var reqLink = req.protocol + '://' + req.get('host') + req.originalUrl;
 	var request = new Request({
 		type: req.body.type,
 		title: req.body.title,
 		id: req.body.id,
-		link: req.protocol + '://' + req.get('host') + req.originalUrl,
+		link: reqLink,
 		filled: false,
 		requester: req.body.user
 	});
@@ -21,20 +31,13 @@ router.post('/myrequests', function(req,res){
 	request.save(function(err){
 		if(err){
 			console.log(err);
+			req.flash("error", "Unable to submit request. Error: " + err);
+			res.redirect(reqLink);
 		};
-	});
-
-	User.findOne({_id: req.body.user}).populate('requests').exec(function(err, requests){
-		if(err){
-			// console.log(err);
-		};
-
-		// console.log(JSON.stringify(requests, null, "\t"));
 
 		req.flash("success", "Request submitted successfully!");
 		res.redirect('/myrequests');
 	});
-
 });
 
 
