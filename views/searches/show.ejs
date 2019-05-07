@@ -86,9 +86,13 @@
 							<a class="btn btn-info mr-2 col-2" href="https://myanimelist.net/manga/<%= mangaInfo.mal_id %>" target="_blank">MAL</a>
 							<input type="hidden" name="title" value="<%= mangaInfo.title %>">
 							<input type="hidden" name="id" value="<%= mangaInfo.mal_id %>">
-							<input type="hidden" name="type" value="<%= mangaInfo.type %>">
+							<input type="hidden" name="type" value="<%= mangaInfo.type.toLowerCase() %>">
 							<input type="hidden" name="user" value="<%= currentUser.id %>">
-							<button class="col-2 btn btn-secondary" type="submit">Request</button>
+							<% if(requested == true){ %>
+								<button class="col-2 btn btn-secondary" disabled>Already Requested</button>
+							<% } else { %>
+								<button class="col-2 btn btn-secondary" type="submit">Request</button>
+							<% }; %>
 						</form>
 					</div>
 				</div>

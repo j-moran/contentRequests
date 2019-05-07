@@ -9,8 +9,10 @@ router.get('/login', function(req,res){
 
 router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: true, successFlash: 'You have been successfully signed in!'}), function(req,res){
 	if(req.session.redirect_to){
-		res.redirect(req.session.redirect_to);
+		var redirect = req.session.redirect_to;
 		delete req.session.redirect_to;
+		
+		res.redirect(redirect);
 	} else {
 		res.redirect('/');
 	};

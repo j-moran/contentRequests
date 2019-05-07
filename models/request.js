@@ -10,4 +10,4 @@ let requestSchema = new mongoose.Schema({
 	dateCreated: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Request', requestSchema, 'requests');
+module.exports = mongoose.model('Request', requestSchema);

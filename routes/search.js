@@ -58,6 +58,7 @@ router.get('/search', middleware.isLoggedIn, function(req,res){
 router.get('/search/show', function(req,res){
 	var id = req.query.id;
 	var media = req.query.media;
+	var query;
 
 	if((media == 'manga') || (media == 'novel')){
 		query = "https://api.jikan.moe/v3/manga/"+ id;
@@ -68,8 +69,20 @@ router.get('/search/show', function(req,res){
 			
 			api.call(query, function(newRecs){
 				var newRecs = JSON.parse(newRecs);
-				
-				res.render('searches/show', {recs: newRecs.recommendations, mangaInfo: info});			
+				query = {};
+				query['id'] = req.query.id;
+
+				Request.findOne(query, function(err, foundRequest){
+					if(err){
+						console.log(err);
+					};
+
+					if(foundRequest){
+						res.render('searches/show', {recs: newRecs.recommendations, mangaInfo: info, requested: true});
+					} else {
+						res.render('searches/show', {recs: newRecs.recommendations, mangaInfo: info, requested: false});			
+					};
+				});
 			});
 		});
 	} else if(media == 'ebook'){

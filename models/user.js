@@ -1,8 +1,8 @@
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 
-let userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	firstName: String,
@@ -10,11 +10,14 @@ let userSchema = new mongoose.Schema({
 	email: String,
 	imageURL: String,
 	permissions: [],
-	requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request'}],
+	requests: [{ 
+		type: mongoose.Schema.Types.ObjectId, 
+		ref: "Request"
+	}],
 	firstLogOn: Boolean,
 	created: {type: Date, default: Date.now}
 });
 
 userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('User', userSchema, 'users');
+module.exports = mongoose.model("User", userSchema);

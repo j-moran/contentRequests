@@ -6,7 +6,19 @@
 		<h1><span>My Requests:</span></h1>
 		<hr>
 
-		<p>FILLLLLLEEEERRRR</p>
+		<div class="row col-9 mx-auto text-center">
+			<span class="col">Title</span>
+			<span class="col">Time Created</span>
+			<span class="col">Info Link</span>
+		</div>
+
+		<% requests.forEach(function(request){ %>
+			<div class="row my-2 col-9 mx-auto">
+				<span class="col"><%= request.title %></span>
+				<span class="col"><%= request.dateCreated %></span>
+				<a class="col btn btn-lg btn-secondary" href="<%= request.link %>">Info</a>
+			</div>
+		<% }); %>
 	</div>	
 </div>
 
