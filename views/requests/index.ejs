@@ -7,16 +7,22 @@
 		<hr>
 
 		<div class="row col-9 mx-auto text-center">
-			<span class="col">Title</span>
-			<span class="col">Time Created</span>
-			<span class="col">Info Link</span>
+			<span class="col mx-2">Title</span>
+			<span class="col mx-2">Time Created</span>
+			<span class="col-2 mx-2">Info Link</span>
+			<span class="col mx-2">Requester</span>
 		</div>
 
+		<hr>
+
 		<% requests.forEach(function(request){ %>
-			<div class="row my-2 col-9 mx-auto">
-				<span class="col"><%= request.title %></span>
-				<span class="col"><%= request.dateCreated %></span>
-				<a class="col btn btn-lg btn-secondary" href="<%= request.link %>">Info</a>
+			<div class="row my-2 col-9 mx-auto text-center">
+				<span class="col mx-2"><%= request.title %></span>
+				<span class="col mx-2"><%= request.dateCreated %></span>
+				<a class="col-2 btn btn-lg btn-secondary mx-2" href="<%= request.link %>">Info</a>
+				<% if(currentUser.username == 'admin'){ %>
+					<span class="col mx-2"><%= request.requester.username %></span>
+				<% }; %>
 			</div>
 		<% }); %>
 	</div>	

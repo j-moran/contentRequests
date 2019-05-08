@@ -8,14 +8,24 @@ router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 	var query = {};
 	query['username'] = req.user.username.toLowerCase();
 
-	User.findOne(query).populate("requests").exec(function(err, foundUser){
-		if(err){
-			console.log(err);
-		} else {
-			var requests = foundUser.requests;
-			res.render('requests/index', {requests: requests});
-		};
-	});
+	if(req.user.username == 'admin'){
+		Request.find({}).populate("requester").exec(function(err, allRequests){
+			if(err){
+				console.log(err);
+			};
+			
+			res.render('requests/index', {requests: allRequests});
+		});
+	} else {
+		User.findOne(query).populate("requests").exec(function(err, foundUser){
+			if(err){
+				console.log(err);
+			} else {
+				var requests = foundUser.requests;
+				res.render('requests/index', {requests: requests});
+			};
+		});
+	};
 });
 
 router.post('/myrequests', function(req,res){
