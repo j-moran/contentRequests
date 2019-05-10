@@ -51,9 +51,15 @@ router.get('/search', middleware.isLoggedIn, function(req,res){
 				// console.log(searchRes[0].best_book.attributes.image_url);
 				res.render('searches/index', {results: searchRes, media: type});
 			});
-		};
+		} //else if(type == 'comic'){
+		// 	query = "https://superheroapi.com/api/" + process.env.SH_KEY + "&format=json&resources=volume&query=" + keyword;
 
-		 // "http://comicvine.gamespot.com/api"
+		// 	api.call(query, function(searchRes){
+		// 		console.log(searchRes);
+		// 	});
+		// }
+		;
+
 
 	};
 });
