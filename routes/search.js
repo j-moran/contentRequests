@@ -52,6 +52,9 @@ router.get('/search', middleware.isLoggedIn, function(req,res){
 				res.render('searches/index', {results: searchRes, media: type});
 			});
 		};
+
+		 // "http://comicvine.gamespot.com/api"
+
 	};
 });
 
