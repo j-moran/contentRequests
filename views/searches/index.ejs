@@ -81,7 +81,7 @@
 
 					<div class="col d-flex align-items-stretch">
 						<div class="card w-100">
-							<img class="card-img-top" src=<%= results[i].best_book.image_url.text %>>
+							<a href="/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><img class="card-img-top" src=<%= results[i].best_book.image_url.text %>></a>
 							<div class="card-body">
 								<p><span><a href="/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><%= results[i].best_book.title.text %></a></span></p>
 								<p><span>By: <%= results[i].best_book.author.name.text %></span></p>

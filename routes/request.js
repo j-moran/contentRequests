@@ -6,6 +6,8 @@ var express 	= require('express'),
 
 router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 	var query = {};
+	var manga = [];
+	var ebooks = [];
 	query['username'] = req.user.username.toLowerCase();
 
 	if(req.user.username == 'admin'){
@@ -13,8 +15,16 @@ router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 			if(err){
 				console.log(err);
 			};
-			
-			res.render('requests/index', {requests: allRequests});
+
+			allRequests.forEach(function(request){
+				if((request.type == 'manga') || (request.type == 'novel')){
+					manga.push(request);
+				} else if(request.type == 'ebook'){
+					ebooks.push(request);
+				};
+			});
+
+			res.render('requests/index', {manga: manga, ebooks: ebooks});
 		});
 	} else {
 		User.findOne(query).populate("requests").exec(function(err, foundUser){
@@ -22,7 +32,16 @@ router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 				console.log(err);
 			} else {
 				var requests = foundUser.requests;
-				res.render('requests/index', {requests: requests});
+				
+				requests.forEach(function(request){
+					if((request.type == 'manga') || (request.type == 'novel')){
+						manga.push(request);
+					} else if(request.type == 'ebook'){
+						ebooks.push(request);
+					};
+				});
+			
+				res.render('requests/index', {manga: manga, ebooks: ebooks});
 			};
 		});
 	};
@@ -41,7 +60,9 @@ router.post('/myrequests', function(req,res){
 		var request = new Request({
 			type: req.body.type,
 			title: req.body.title,
+			author: req.body.author,
 			id: req.body.id,
+			type: req.body.type,
 			link: reqLink,
 			filled: false,
 			requester: foundUser._id

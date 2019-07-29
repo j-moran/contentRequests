@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 let requestSchema = new mongoose.Schema({
 	type: 	String,
 	title: 	String,
+	author: String,
 	id: 	String,
 	link: 	String,
 	filled: Boolean,

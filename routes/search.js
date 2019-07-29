@@ -111,9 +111,20 @@ router.get('/search/show', function(req,res){
 			};
 			var info = JSON.parse(convert.xml2json(info, options));
 			info = info.GoodreadsResponse.book;
+			query = {};
+			query['id'] = req.query.id;
 
-			// console.log(info);
-			res.render('searches/show', {bookInfo: info, media: media}); 
+			Request.findOne(query, function(err, foundRequest){
+				if(err){
+					console.log(err);
+				};
+
+				if(foundRequest){
+					res.render('searches/show', {bookInfo: info, media: media, requested: true});
+				} else {
+					res.render('searches/show', {bookInfo: info, media: media, requested: false});			
+				};
+			}); 
 		});
 	};
 });
