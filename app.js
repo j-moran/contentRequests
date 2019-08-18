@@ -26,7 +26,7 @@ var Database		= require('./scripts/database');
 //App Setup
 //=======================
 app.set('view engine', 'ejs');
-app.use('/public', express.static("public"));
+app.use('/' + process.env.APP_PREFIX + '/public', express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 app.use(require('express-session')({
