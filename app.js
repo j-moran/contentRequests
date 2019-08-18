@@ -12,27 +12,21 @@ var express 		= require('express')
 	Request			= require('./models/request'),
 	seedDB 			= require('./scripts/seed');
 
+//=======================
+//Environment Setup
+//=======================
 require('dotenv').config();
-
-//=======================
-//Route Variables
-//=======================
-var searchRoutes	= require('./routes/search'),
-	authRoutes 		= require('./routes/auth'),
-	userRoutes 		= require('./routes/user'),
-	reqRoutes		= require('./routes/request');
 
 //=======================
 //Database Setup
 //=======================
 var Database		= require('./scripts/database');
 
-
 //=======================
 //App Setup
 //=======================
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use('/public', express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 app.use(require('express-session')({
@@ -51,13 +45,11 @@ app.use(function(req,res,next){
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash("error");
 	res.locals.success = req.flash("success");
+	res.locals.prefix = process.env.APP_PREFIX;
 	next();
 });
 
-app.use(searchRoutes);
-app.use(authRoutes);
-app.use(userRoutes);
-app.use(reqRoutes);
+app.use('/' + process.env.APP_PREFIX, require('./routes'));
 
 seedDB();
 

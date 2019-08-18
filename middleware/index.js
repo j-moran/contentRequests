@@ -4,9 +4,9 @@ var middleware = {
 			return next();
 		};
 
-		req.session.redirect_to = req.path;
+		req.session.redirect_to = '/' + process.env.APP_PREFIX + req.path;
 		req.flash("error", "You must be logged in to access this page!");
-		res.redirect("/login");
+		res.redirect("/" + process.env.APP_PREFIX + "/login");
 	},
 
 	isAdmin: function(req,res,next){
@@ -19,7 +19,7 @@ var middleware = {
 	},
 
 	previousPage: function(req,res,next){
-		req.session.redirect_to = req.path;
+		req.session.redirect_to = '/' + process.env.APP_PREFIX + req.path;
 	}	
 };
 

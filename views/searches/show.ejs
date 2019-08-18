@@ -24,11 +24,15 @@
 						<span class="col">ISBN-13: <%= bookInfo.isbn13.text %></span>
 					</div>
 					<p class="mt-2"><span>Synopsis:</span> <%= bookInfo.description.text.replace(/(<([^>]+)>)/ig, "") %></p>
-					<form class="row mb-3" action="/myrequests" method="POST">
+					<form class="row mb-3" action="/<%= prefix %>/myrequests" method="POST">
 						<span class="col-2 mb-3 mr-2">Request Link:</span>
 						<input type="hidden" name="title" value="<%= bookInfo.title.text %>">
 						<input type="hidden" name="id" value="<%= bookInfo.id.text %>">
-						<input type="hidden" name="author" value="<%= bookInfo.authors.author[0].name.text %>">
+						<% if((bookInfo.authors.author).length > 1){ %>
+							<input type="hidden" name="author" value="<%= bookInfo.authors.author[0].name.text %>">
+						<% } else { %>
+							<input type="hidden" name="author" value="<%= bookInfo.authors.author.name.text %>">
+						<% }; %>
 						<input type="hidden" name="type" value="ebook">
 						<input type="hidden" name="user" value="<%= currentUser.id %>">
 						<% if(requested == true){ %>
@@ -58,9 +62,9 @@
 				<% for(var i = 0; i < (bookInfo.similar_books.book.length < 5 ? bookInfo.similar_books.book.length : 10); i += 2){ %>
 					<div class="col d-flex align-items-stretch">
 						<div class="card w-100">
-							<a href="/search/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><img class="card-img-top" src=<%= bookInfo.similar_books.book[i].image_url.text %>></a>
+							<a href="/<%= prefix %>/search/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><img class="card-img-top" src=<%= bookInfo.similar_books.book[i].image_url.text %>></a>
 							<div class="card-body">
-								<p><span><a href="/search/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><%= bookInfo.similar_books.book[i].title.text %></a></span></p>
+								<p><span><a href="/<%= prefix %>/search/show?media=<%= media %>&id=<%= bookInfo.similar_books.book[i].id.text %>"><%= bookInfo.similar_books.book[i].title.text %></a></span></p>
 								<p><span>By: <%= bookInfo.similar_books.book[i].authors.author.name.text %></span></p>
 							</div>
 						</div>
@@ -91,7 +95,7 @@
 						<% }); %>
 					</p>
 					<div class="mb-3">
-						<form class="row mb-3 p-0" action="/myrequests" method="POST">
+						<form class="row mb-3 p-0" action="/<%= prefix %>/myrequests" method="POST">
 							<span class="col-2 mx-2 mb-3">Request Link:</span>
 							<input type="hidden" name="title" value="<%= mangaInfo.title %>">
 							<input type="hidden" name="id" value="<%= mangaInfo.mal_id %>">
@@ -127,7 +131,7 @@
 							<div class="card w-100">
 								<img class="recImg card-img-top" src=<%= recs[i].image_url %>>
 								<div class="card-body">
-									<p class="card-title"><a href="/search/show?media=manga&id=<%= recs[i].mal_id %>"><span><%= recs[i].title %></span></a></p>	
+									<p class="card-title"><a href="/<%= prefix %>/search/show?media=manga&id=<%= recs[i].mal_id %>"><span><%= recs[i].title %></span></a></p>	
 								</div>
 							</div>
 						</div>

@@ -72,3 +72,9 @@ hr {
 .modal-body {
 	background: ;
 }
+
+/* Request View */
+.item {
+	border-bottom: 1px solid #cb7a1f60;
+	padding-bottom: 10px;
+}

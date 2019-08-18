@@ -2,7 +2,7 @@
 	<nav id="sidebar">
         <ul class="list-unstyled components">
             <li>
-                <a class="text-center" href="/search">Search</a>
+                <a class="text-center" href="/<%= prefix %>/search">Search</a>
             </li>
             
             <hr>
@@ -12,26 +12,26 @@
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= currentUser.username %></a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="/profile">Profile</a>
+                            <a href="/<%= prefix %>/profile">Profile</a>
                         </li>
 
                         <li>
-                            <a href="/myrequests">My Requests</a>
+                            <a href="/<%= prefix %>/myrequests">My Requests</a>
                         </li>
 
                         <li>
-                            <a href="/logout">Logout</a>
+                            <a href="/<%= prefix %>/logout">Logout</a>
                         </li>
                     </ul>
                     <hr>
                 <% } else { %>    
-                    <a href="/login">Log In</a>
+                    <a href="/<%= prefix %>/login">Log In</a>
                     <hr>
                 <% }; %>
             </li>
 
             <li class="text-center">
-                <a href="/about">About</a>
+                <a href="/<%= prefix %>/about">About</a>
             </li>
             
             <hr>

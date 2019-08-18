@@ -82,7 +82,7 @@ router.post('/myrequests', function(req,res){
 				};
 
 				req.flash("success", "Request submitted successfully!");
-				res.redirect('/myrequests');
+				res.redirect('/' + process.env.APP_PREFIX + '/myrequests');
 			});
 		});
 	});

@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="card" id="reqForm">
-		<form id="searchForm" class="card-body" action="/search" method="get">
+		<form id="searchForm" class="card-body" action="/<%= prefix %>/search" method="get">
 			<div class="form-group">
 				<label for="keyword">Content Search:</label>
 				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Enter content to search for:">
@@ -40,7 +40,7 @@
 				<p>NSFW:</p>
 				<div class="form-check">
 					<input class="form-check-input" type="checkbox" id="nsfw" name="nsfw" value=1>
-					<label class="form-check-label" for="nsfw">Include NSFW material</label>
+					<label class="form-check-label" for="nsfw">Include NSFW material (Manga and Light Novel Only)</label>
 				</div>
 			</div>
 
@@ -64,7 +64,7 @@
 						<div class="card w-100">
 							<img class="card-img-top" src=<%= results[i].image_url %>>
 							<div class="card-body">
-								<p><a href="/search/show?media=<%= media %>&id=<%= results[i].mal_id %>"><span><%= results[i].title %></span></a></p>	
+								<p><a href="/<%= prefix %>/search/show?media=<%= media %>&id=<%= results[i].mal_id %>"><span><%= results[i].title %></span></a></p>	
 							</div>
 						</div>
 					</div>
@@ -81,9 +81,9 @@
 
 					<div class="col d-flex align-items-stretch">
 						<div class="card w-100">
-							<a href="/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><img class="card-img-top" src=<%= results[i].best_book.image_url.text %>></a>
+							<a href="/<%= prefix %>/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><img class="card-img-top" src=<%= results[i].best_book.image_url.text %>></a>
 							<div class="card-body">
-								<p><span><a href="/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><%= results[i].best_book.title.text %></a></span></p>
+								<p><span><a href="/<%= prefix %>/search/show?media=<%= media %>&id=<%= results[i].best_book.id.text %>"><%= results[i].best_book.title.text %></a></span></p>
 								<p><span>By: <%= results[i].best_book.author.name.text %></span></p>
 							</div>
 						</div>

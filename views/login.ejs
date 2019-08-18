@@ -2,7 +2,7 @@
 <% include ./partials/sidebar %>
 
 	<div class="card w-50 mx-auto">
-		<form class="card-body text-center" action="/login" method="post">
+		<form class="card-body text-center" action="/<%= prefix %>/login" method="post">
 
 			<h2 class="text-center">Login</h2>
 			<hr>
@@ -20,7 +20,7 @@
 			<hr>
 			
 			<div class="form-group row">
-				<a class="btn btn-cancel btn-lg col-4 mx-auto" href="/register">Register</a>
+				<a class="btn btn-cancel btn-lg col-4 mx-auto" href="/<%= prefix %>/register">Register</a>
 				<button class="btn btn-dark btn-lg col-4 mx-auto">Log In</button>
 			</div>
 		</form>

@@ -7,10 +7,6 @@ var express 	= require('express'),
 	api 		= require('../public/js/api'),
 	middleware  = require('../middleware');
 
-router.get('/', function(req,res){
-	res.render('landing');
-});
-
 // SEARCH ROUTES
 
 router.get('/search', middleware.isLoggedIn, function(req,res){

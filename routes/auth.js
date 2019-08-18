@@ -14,14 +14,14 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/login',
 		
 		res.redirect(redirect);
 	} else {
-		res.redirect('/');
+		res.redirect('/' + process.env.APP_PREFIX);
 	};
 });
 
 router.get('/logout', function(req,res){
 	req.logout();
 	req.flash("success", "You have been successfully logged out!");
-	res.redirect('/');
+	res.redirect('/' + process.env.APP_PREFIX + '/login');
 });
 
 router.get('/register', function(req,res){
@@ -41,12 +41,8 @@ router.post('/register', function(req,res){
 		user.email = req.body.email;
 		user.save();
 
-		// console.log(user);
-		passport.authenticate('local')(req,res,function(){
-			req.flash("success", "User created successfully!");
-			res.redirect('/');
-		});
-
+		req.flash("success", "You have successfully created your new account! To use the site please log in below!");
+		res.redirect('/' + process.env.APP_PREFIX + '/login');
 	});
 });
 

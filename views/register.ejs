@@ -7,7 +7,7 @@
 		<h2 class="text-center">Register</h2>
 		<hr>
 
-		<form class="form" action="/register" method="post">
+		<form class="form" action="/<%= prefix %>/register" method="post">
 				<div class="form-group row">
 					<label class="col-2 control-label" for="firstName">First Name:</label>
 					<input class="col-7 form-control mx-auto" type="text" name="firstName" placeholder="Enter first name...">
@@ -41,7 +41,7 @@
 				<hr>
 
 				<div class="form-group row">
-					<a class="col-4 mx-auto btn btn-danger btn-lg" href="/">Cancel</a>
+					<a class="col-4 mx-auto btn btn-danger btn-lg" href="/<%= prefix %>">Cancel</a>
 					<button class="btn btn-dark btn-lg col-4 offset-1 mx-auto">Sign Up!</button>
 				</div>
 			</form>

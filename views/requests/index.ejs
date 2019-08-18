@@ -27,12 +27,12 @@
 
 		<% if(typeof manga != "undefined"){ %>
 			<% manga.forEach(function(request){ %>
-				<div class="row my-2 col mx-auto text-center justify-content-center">
+				<div class="row my-2 col mx-auto text-center justify-content-center item">
 					<span class="col-2 mx-2"><%= request.title %></span>
 					<span class="col-2 mx-2"><%= request.author %></span>
 					<span class="col-2 mx-2"><%= request.dateCreated %></span>
 					<span class="col-2 mx-2"><%= request.type %></span>
-					<a class="col-2 btn btn-lg btn-secondary mx-2" href="<%= request.link %>">Info</a>
+					<a class="col-2 btn btn-lg btn-secondary mx-2" href="/<%= prefix + request.link %>">Info</a>
 					<% if(currentUser.username == 'admin'){ %>
 						<span class="col mx-2"><%= request.requester.username %></span>
 					<% }; %>
@@ -62,12 +62,12 @@
 
 		<% if(typeof ebooks != "undefined"){ %>
 			<% ebooks.forEach(function(request){ %>
-				<div class="row my-2 col mx-auto text-center justify-content-center">
+				<div class="row my-2 col mx-auto text-center justify-content-center item">
 					<span class="col-2 mx-2"><%= request.title %></span>
 					<span class="col-2 mx-2"><%= request.author %></span>
 					<span class="col-2 mx-2"><%= request.dateCreated %></span>
 					<span class="col-2 mx-2"><%= request.type %></span>
-					<a class="col-2 btn btn-lg btn-secondary mx-2" href="<%= request.link %>">Info</a>
+					<a class="col-2 btn btn-lg btn-secondary mx-2" href="/<%= prefix + request.link %>">Info</a>
 					<% if(currentUser.username == 'admin'){ %>
 						<span class="col mx-2"><%= request.requester.username %></span>
 					<% }; %>
@@ -79,7 +79,7 @@
 
 <hr>
 
-<div class="card">
+<!-- <div class="card">
 	<div class="card-body">
 		<h2>Comics and Graphic Novels:</h2>
 		<hr>
@@ -91,5 +91,5 @@
 		</div>
 		<hr>
 	</div>	
-</div>
+</div> -->
 <% include ../partials/footer %>
