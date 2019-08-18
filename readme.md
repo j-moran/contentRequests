@@ -27,3 +27,9 @@ ___Note: This site is a work in progress. I am working on getting things running
 * passport-local
 * passport-local-mongoose
 * xml-js
+
+## In Progress
+* About Page
+* Admin Dashboard
+* Invite-Only Registration
+* Email communications

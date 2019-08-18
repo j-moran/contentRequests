@@ -6,19 +6,22 @@
             </li>
             
             <hr>
-
             <li class="text-center">
                 <% if(currentUser){ %>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= currentUser.username %></a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
+
+                        <% if(currentUser.permissions.includes('admin')){ %>
+                            <li>
+                                <a href="/<%= prefix %>/dashboard">Dashboard</a>
+                            </li>
+                        <% }; %>
                         <li>
                             <a href="/<%= prefix %>/profile">Profile</a>
                         </li>
-
                         <li>
                             <a href="/<%= prefix %>/myrequests">My Requests</a>
                         </li>
-
                         <li>
                             <a href="/<%= prefix %>/logout">Logout</a>
                         </li>
