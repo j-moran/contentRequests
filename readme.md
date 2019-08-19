@@ -8,6 +8,7 @@ ___Note: This site is a work in progress. I am working on getting things running
 1. Node.JS 
 2. MongoDB
 3. Goodreads API key
+4. GMail account
 
 ## Setup
 1. Install Node.JS and MongoDB if you haven't already. Make sure that both applications have been added to your PATH.
@@ -19,10 +20,12 @@ ___Note: This site is a work in progress. I am working on getting things running
 ## Installed Node packages
 * body-parser
 * connect-flash
+* dotenv
 * ejs
 * express
 * express-session
 * mongoose
+* nodemailer
 * passport
 * passport-local
 * passport-local-mongoose
@@ -33,3 +36,4 @@ ___Note: This site is a work in progress. I am working on getting things running
 * Admin Dashboard
 * Invite-Only Registration
 * Email communications
+* Password Reset

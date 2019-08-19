@@ -1,9 +1,25 @@
 var express 	= require('express'),
 	router		= express.Router(),
+	nodemailer	= require('nodemailer'),
 	User		= require('../models/user'),
 	Request		= require('../models/request'),
 	middleware  = require('../middleware');
 
+
+//=======================
+//Email Setup
+//=======================
+var transporter = nodemailer.createTransport({
+ service: 'gmail',
+ auth: {
+        user: process.env.GMAIL_ACCOUNT,
+        pass: process.env.GMAIL_PASS
+    }
+});
+
+//=======================
+//Request Routes
+//=======================
 router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 	var query = {};
 	var manga = [];
