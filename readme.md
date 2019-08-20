@@ -37,3 +37,5 @@ ___Note: This site is a work in progress. I am working on getting things running
 * Invite-Only Registration
 * Email communications
 * Password Reset
+* Calibre Integration
+* Ubooquity Integration
