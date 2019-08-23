@@ -7,16 +7,34 @@ var express 	= require('express'),
 // USER PROFILE ROUTES
 
 router.get('/profile',middleware.isLoggedIn, function(req,res){
-	res.render('users/index');
+	res.render('profile/index');
 });
 
 router.get('/profile/edit', middleware.isLoggedIn, function(req,res){
-	res.render('users/edit');
+	res.render('profile/edit');
 });
 
 router.post('/profile/edit', middleware.isLoggedIn, function(req,res){
-	//get user info and change it 
-	res.redirect('/profile');
+	var query = {};
+	query['username'] = req.user.username;
+
+	User.findOne(query, function(err, foundUser){
+		if(err){
+			console.log(err);
+		} else {
+			var changes = {
+				//changes go here
+			};
+
+			User.update(query, changes, function(err){
+				if(err){
+					console.log(err);
+				} else {
+					res.redirect('/' + process.env.APP_PREFIX + '/profile');
+				};
+			});
+		};
+	});
 });
 
 module.exports = router;

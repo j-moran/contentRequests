@@ -4,7 +4,7 @@ var express 	= require('express'),
 	convert 	= require('xml-js'),
 	User		= require('../models/user'),
 	Request		= require('../models/request'),
-	api 		= require('../public/js/api'),
+	api 		= require('../functions/api'),
 	middleware  = require('../middleware');
 
 // SEARCH ROUTES

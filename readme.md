@@ -34,8 +34,9 @@ ___Note: This site is a work in progress. I am working on getting things running
 ## In Progress
 * About Page
 * Admin Dashboard
-* Invite-Only Registration
+* Invite-Only Registration - Done
 * Email communications
 * Password Reset
 * Calibre Integration
 * Ubooquity Integration
+* Profile Edits

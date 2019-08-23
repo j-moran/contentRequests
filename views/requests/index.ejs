@@ -3,7 +3,7 @@
 
 <div class="card">
 	<div class="card-body">
-		<h1><span>My Requests:</span></h1>
+		<h1><span><%= currentUser.permissions.includes('admin') ? 'All' :  'My'; %> Requests:</span></h1>
 	</div>	
 </div>
 

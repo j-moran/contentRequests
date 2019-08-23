@@ -20,7 +20,7 @@
                             <a href="/<%= prefix %>/profile">Profile</a>
                         </li>
                         <li>
-                            <a href="/<%= prefix %>/myrequests">My Requests</a>
+                            <a href="/<%= prefix %>/myrequests"><%= currentUser.permissions.includes('admin') ? 'All' :  'My'; %> Requests</a>
                         </li>
                         <li>
                             <a href="/<%= prefix %>/logout">Logout</a>
