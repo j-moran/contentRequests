@@ -9,4 +9,20 @@
 
 <hr>
 
+<div class="card col-4 mx-auto">
+	<div class="card-body">
+		<% if(users.length > 0){ %>
+			<% users.forEach(function(user){ %>
+				<div class="row my-2 col mx-auto text-center justify-content-center item">
+					<span class="col mx-2"><%= user.username %></span>
+				</div>
+			<% }); %>
+		<% }; %>
+	</div>	
+</div>
+
+<hr>
+
+<a href="/<%= prefix %>/dashboard" class="btn btn-lg btn-dark">Return to Dashboard</a>
+
 <% include ../partials/footer %>

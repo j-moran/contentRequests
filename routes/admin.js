@@ -91,4 +91,39 @@ router.get('/users', middleware.isLoggedIn, middleware.isAdmin, function(req,res
 	});
 });
 
+router.get('/users/manage', middleware.isLoggedIn, middleware.isAdmin, function(req,res){
+	if(Object.keys(req.query).length === 0){
+		res.render('users/show');
+	} else{
+		var query = {};
+		query['username'] = req.query.username.toLowerCase();
+
+		User.findOne(query, function(err, foundUser){
+			if(err){
+				console.log(err);
+				req.flash('error', 'Problem locating user. Please try again.');
+				res.redirect('/' + process.env.APP_PREFIX + '/users/manage');
+			} else {
+				res.render('users/show', {user: foundUser});
+			};
+		});
+	};
+});
+
+router.get('/users/delete', middleware.isLoggedIn, middleware.isAdmin, function(req,res){
+	var query = {};
+	query['_id'] = req.query.userId;
+
+	User.findByIdAndDelete(query, function(err){
+		if(err){
+			console.log(err);
+			req.flash('error', 'Unable to delete user. Try again.');
+			res.redirect('/' + process.env.APP_PREFIX + '/users/manage');
+		} else {
+			req.flash('success', 'User deleted successfully!');
+			res.redirect('/' + process.env.APP_PREFIX + '/users/manage');
+		};
+	});
+});
+
 module.exports = router

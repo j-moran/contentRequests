@@ -61,7 +61,7 @@ router.post('/register', function(req,res){
 			var inviteDate = foundInvite.created;
 			var currentDate = Date.now;
 			var query = {};
-			query['username'] = req.body.username;
+			query['username'] = req.body.username.toLowerCase();
 
 			if(((currentDate - inviteDate) / 1000) > 259200){
 				Invite.deleteOne(invite, function(err){
@@ -75,7 +75,7 @@ router.post('/register', function(req,res){
 			} else {
 				User.findOne(query, function(err, foundUser){
 					if(!foundUser){
-						var newUser = new User({username: req.body.username});
+						var newUser = new User({username: req.body.username.toLowerCase()});
 						User.register(newUser, req.body.password, function(err, user){
 							if(err){
 								req.flash("error", "Unable to create user. Please contact site administrator. Error: " + err.message);
@@ -102,8 +102,6 @@ router.post('/register', function(req,res){
 							transporter.sendMail(mailOptions, function (err, info) {
 							   if(err)
 							     console.log(err)
-							   //else
-							     //console.log(info);
 							});
 
 							Invite.deleteOne(invite, function(err){
