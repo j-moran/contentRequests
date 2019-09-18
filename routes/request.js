@@ -21,9 +21,8 @@ var transporter = nodemailer.createTransport({
 //Request Routes
 //=======================
 router.get('/myrequests', middleware.isLoggedIn, function(req,res){
+	var fillCount = 0;
 	var query = {};
-	var manga = [];
-	var ebooks = [];
 	query['username'] = req.user.username.toLowerCase();
 
 	if(req.user.username == 'admin'){
@@ -33,32 +32,26 @@ router.get('/myrequests', middleware.isLoggedIn, function(req,res){
 			};
 
 			allRequests.forEach(function(request){
-				if((request.type == 'manga') || (request.type == 'novel')){
-					manga.push(request);
-				} else if(request.type == 'ebook'){
-					ebooks.push(request);
+				if(!request.filled){
+					fillCount++;
 				};
 			});
 
-			res.render('requests/index', {manga: manga, ebooks: ebooks});
+			res.render('requests/index', {requests: allRequests, count: fillCount});
 		});
 	} else {
 		User.findOne(query).populate("requests").exec(function(err, foundUser){
 			if(err){
 				console.log(err);
-			} else {
-				var requests = foundUser.requests;
-				
-				requests.forEach(function(request){
-					if((request.type == 'manga') || (request.type == 'novel')){
-						manga.push(request);
-					} else if(request.type == 'ebook'){
-						ebooks.push(request);
-					};
-				});
-			
-				res.render('requests/index', {manga: manga, ebooks: ebooks});
 			};
+
+			foundUser.requests.forEach(function(request){
+				if(!request.filled){
+					fillCount++;
+				};
+			});
+			
+			res.render('requests/index', {requests: foundUser.requests, count: fillCount});
 		});
 	};
 });
@@ -101,6 +94,42 @@ router.post('/myrequests', function(req,res){
 				res.redirect('/' + process.env.APP_PREFIX + '/myrequests');
 			});
 		});
+	});
+});
+
+router.get('/myrequests/fill', middleware.isLoggedIn, middleware.isAdmin, function(req,res){
+	var reqId = req.query.id;
+	var userEmail = req.query.email;
+	var query = {};
+	query['id'] = reqId;
+
+	Request.findOneAndUpdate(query, { filled: 'true' }, function(err, foundRequest){
+		if(err){
+			console.log(err);
+			req.flash('error', 'There was a problem with your request. Please try again.');
+			res.redirect('/' + process.env.APP_PREFIX + '/myrequests');
+		} else {
+			var mailOptions = {
+				from: 'Postmaster <postmaster@morans.info>',
+				to: userEmail,
+				subject: 'Morans.info Request Filled',
+				html: 
+					'<p>Your request for <strong>' + foundRequest.title + '</strong> has been filled.</p>\
+					</br>\
+					<hr>\
+					<p>Morans.info</p>'
+			};
+
+			transporter.sendMail(mailOptions, function (err, info) {
+			   if(err)
+			     console.log(err)
+			   //else
+			     //console.log(info);
+			});
+
+			req.flash('success', 'Request filled successfully.');
+			res.redirect('/' + process.env.APP_PREFIX + '/myrequests');
+		};
 	});
 });
 

@@ -3,97 +3,87 @@
 
 <div class="card">
 	<div class="card-body">
-		<h1><span><%= currentUser.permissions.includes('admin') ? 'All' :  'My'; %> Requests:</span></h1>
+		<h2><span><%= currentUser.permissions.includes('admin') ? 'All' :  'My'; %> Requests:</span></h2>
 	</div>	
 </div>
 
 <hr>
 
-<div class="card">
-	<div class="card-body">
-		<h2>Manga and Light Novels:</h2>
-		<hr>
-		<div class="row col mx-auto text-center justify-content-center">
-			<span class="col-2 mx-2">Title</span>
-			<span class="col-2 mx-2">Author</span>
-			<span class="col-2 mx-2">Time Created</span>
-			<span class="col-2 mx-2">Type</span>
-			<span class="col-2 mx-2">Info Link</span>
-			<% if(currentUser.username == 'admin'){ %>
-				<span class="col mx-2">Requester</span>
+<% if(typeof requests != "undefined"){ %>
+	<div class="card">
+		<div class="card-body">
+			<div class="row col mx-auto text-center justify-content-center">
+				<span class="col mx-2">Title</span>
+				<span class="col mx-2">Author</span>
+				<span class="col mx-2">Time Created</span>
+				<span class="col mx-2">Type</span>
+				<span class="col mx-2">Info Link</span>
+				<% if(currentUser.username == 'admin'){ %>
+					<span class="col mx-2">Requester</span>
+					<span class="col mx-2">Fill?</span>
+				<% }; %>
+			</div>
+			
+			<hr>
+			
+			<% if(count == 0){ %>
+				<div class="row mx-auto">
+					<h2 class="col text-center">No Requests</h2>
+				</div>
 			<% }; %>
-		</div>
-		<hr>
 
-		<% if(typeof manga != "undefined"){ %>
-			<% manga.forEach(function(request){ %>
+			<% requests.forEach(function(request){ %>
 				<% if(!request.filled){ %>
+					<div class="row my-2 col mx-auto text-center justify-content-center item">
+						<span class="col mx-2"><%= request.title %></span>
+						<span class="col mx-2"><%= request.author %></span>
+						<span class="col mx-2"><%= request.dateCreated %></span>
+						<span class="col mx-2"><%= request.type %></span>
+						<a class="col btn btn-lg btn-secondary mx-2 h-50" href="/<%= prefix + request.link %>">Info</a>
+						<% if(currentUser.username == 'admin'){ %>
+							<span class="col mx-2"><%= request.requester.username %></span>
+							<a href="/<%= prefix %>/myrequests/fill?id=<%= request.id %>&email=<%= request.requester.email %>" class="col btn btn-lg btn-secondary mx-2 h-50 fas fa-check-square"></a>
+						<% }; %>
+					</div>
+				<% }; %>
+			<% }); %>
+		</div>	
+	</div>
+
+	<hr>
+
+	<div class="card">
+		<div class="card-body">
+			<h2><span>Latest Filled Requests:</span></h2>
+			<hr>
+			<div class="row col mx-auto text-center justify-content-center">
+				<span class="col-2 mx-2">Title</span>
+				<span class="col-2 mx-2">Author</span>
+				<span class="col-2 mx-2">Time Created</span>
+				<span class="col-2 mx-2">Type</span>
+				<span class="col-2 mx-2">Info Link</span>
+				<% if(currentUser.username == 'admin'){ %>
+					<span class="col mx-2">Requester</span>
+				<% }; %>
+			</div>
+			<hr>
+
+			<% requests.forEach(function(request){ %>
+				<% if(request.filled){ %>
 					<div class="row my-2 col mx-auto text-center justify-content-center item">
 						<span class="col-2 mx-2"><%= request.title %></span>
 						<span class="col-2 mx-2"><%= request.author %></span>
 						<span class="col-2 mx-2"><%= request.dateCreated %></span>
 						<span class="col-2 mx-2"><%= request.type %></span>
-						<a class="col-2 btn btn-lg btn-secondary mx-2" href="/<%= prefix + request.link %>">Info</a>
+						<a class="col-2 btn btn-lg btn-secondary mx-2 h-50" href="/<%= prefix + request.link %>">Info</a>
 						<% if(currentUser.username == 'admin'){ %>
 							<span class="col mx-2"><%= request.requester.username %></span>
 						<% }; %>
 					</div>
 				<% }; %>
-			<% }); %>
-		<% }; %>
-	</div>	
-</div>
+			<% }); %>	
+		</div>	
+	</div>
+<% }; %>
 
-<hr>
-
-<div class="card">
-	<div class="card-body">
-		<h2>E-Books:</h2>
-		<hr>
-		<div class="row col mx-auto text-center justify-content-center">
-			<span class="col-2 mx-2">Title</span>
-			<span class="col-2 mx-2">Author</span>
-			<span class="col-2 mx-2">Time Created</span>
-			<span class="col-2 mx-2">Type</span>
-			<span class="col-2 mx-2">Info Link</span>
-			<% if(currentUser.username == 'admin'){ %>
-				<span class="col mx-2">Requester</span>
-			<% }; %>
-		</div>
-		<hr>
-
-		<% if(typeof ebooks != "undefined"){ %>
-			<% ebooks.forEach(function(request){ %>
-				<% if(!request.filled){ %>
-					<div class="row my-2 col mx-auto text-center justify-content-center item">
-						<span class="col-2 mx-2"><%= request.title %></span>
-						<span class="col-2 mx-2"><%= request.author %></span>
-						<span class="col-2 mx-2"><%= request.dateCreated %></span>
-						<span class="col-2 mx-2"><%= request.type %></span>
-						<a class="col-2 btn btn-lg btn-secondary mx-2" href="/<%= prefix + request.link %>">Info</a>
-						<% if(currentUser.username == 'admin'){ %>
-							<span class="col mx-2"><%= request.requester.username %></span>
-						<% }; %>
-					</div>
-				<% }; %>
-			<% }); %>
-		<% }; %>	
-	</div>	
-</div>
-
-<hr>
-
-<!-- <div class="card">
-	<div class="card-body">
-		<h2>Comics and Graphic Novels:</h2>
-		<hr>
-		<div class="row col-9 mx-auto text-center">
-			<span class="col mx-2">Title</span>
-			<span class="col mx-2">Time Created</span>
-			<span class="col-2 mx-2">Info Link</span>
-			<span class="col mx-2">Requester</span>
-		</div>
-		<hr>
-	</div>	
-</div> -->
 <% include ../partials/footer %>
